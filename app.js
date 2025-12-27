@@ -1,18 +1,21 @@
 /************************
  * Fixtures (semaine en cours) via football-data.org
  ************************/
-const API_TOKEN = "fe5c1a50cdb84914bb66f51dde53c6bb"; // ← ton token
-const COMP = "PL";
+const API_TOKEN = "fe5c1a50cdb84914bb66f51dde53c6bb"; // Ton token
+const COMP = "PL"; // Premier League
 const TZ = Intl.DateTimeFormat().resolvedOptions().timeZone || "Europe/Paris";
 
 const fmtDay  = new Intl.DateTimeFormat("fr-FR",{weekday:"short",day:"2-digit",month:"short"});
 const fmtTime = new Intl.DateTimeFormat("fr-FR",{hour:"2-digit",minute:"2-digit",hour12:false,timeZone:TZ});
 const iso = d => d.toISOString().slice(0,10);
 
+// --- Fonctions utilitaires pour les dates ---
 function startOfWeek(d=new Date()){ const x=new Date(d); const wd=(x.getDay()+6)%7; x.setHours(0,0,0,0); x.setDate(x.getDate()-wd); return x; }
 function endOfWeek(d=new Date()){ const x=startOfWeek(d); x.setDate(x.getDate()+6); x.setHours(23,59,59,999); return x; }
 
 function setWeekLabel(a,b){ const el=document.getElementById("week-range"); if(el) el.textContent=`${fmtDay.format(a)} → ${fmtDay.format(b)}`; }
+
+// --- Gestion des logos et noms d'équipes ---
 const crest = t => t?.crest || t?.emblem || "";
 const niceName = n => ({
   "Manchester City FC":"Man City",
@@ -20,8 +23,11 @@ const niceName = n => ({
   "Tottenham Hotspur FC":"Spurs",
   "Nottingham Forest FC":"Nott'm Forest",
   "Brighton & Hove Albion FC":"Brighton",
+  "Wolverhampton Wanderers FC": "Wolves",
+  "West Ham United FC": "West Ham"
 })[n] || n.replace(/ FC$| A\.?F\.?C$| F\.?C\.?$/i,"");
 
+// --- Affichage (Rendu HTML) ---
 function renderFixtures(matches){
   const root = document.getElementById("fixtures");
   const empty = document.getElementById("fx-empty");
@@ -36,6 +42,7 @@ function renderFixtures(matches){
     const dt = new Date(m.utcDate);
     const dayKey = dt.toISOString().slice(0,10);
 
+    // Création de l'en-tête du jour si c'est un nouveau jour
     if(dayKey !== current){
       current = dayKey;
       const day = document.createElement("div");
@@ -50,6 +57,7 @@ function renderFixtures(matches){
     const row = document.createElement("div");
     row.className = "fx-item";
 
+    // Équipe Domicile
     const home = document.createElement("div");
     home.className = "fx-team home";
     home.innerHTML = `
@@ -58,6 +66,7 @@ function renderFixtures(matches){
       <span>${niceName(m.homeTeam.shortName || m.homeTeam.name)}</span>
     `;
 
+    // Score ou Heure
     const mid = document.createElement("div");
     mid.className = "fx-kick";
     let text;
@@ -65,11 +74,13 @@ function renderFixtures(matches){
       const h = m.score.fullTime.home ?? "-";
       const a = m.score.fullTime.away ?? "-";
       text = `${h}:${a}`;
+      mid.classList.add("played"); // Ajoute une classe si joué (optionnel pour CSS)
     } else {
       text = fmtTime.format(dt);
     }
     mid.textContent = text;
 
+    // Équipe Extérieur
     const away = document.createElement("div");
     away.className = "fx-team away";
     away.innerHTML = `
@@ -82,27 +93,53 @@ function renderFixtures(matches){
     list.appendChild(row);
     row.insertAdjacentHTML("afterend","<div class='fx-sep'></div>");
   }
+  // Supprimer le dernier séparateur
   const seps = root.querySelectorAll(".fx-sep"); if(seps.length) seps[seps.length-1].remove();
 }
 
+// --- Chargement des données (CORRIGÉ AVEC PROXY) ---
 async function loadWeek(){
   const from = startOfWeek(), to = endOfWeek();
   setWeekLabel(from, to);
+  
   try{
-    const url = `https://api.football-data.org/v4/competitions/${COMP}/matches?dateFrom=${iso(from)}&dateTo=${iso(to)}`;
-    const res = await fetch(url, { headers:{ "X-Auth-Token": API_TOKEN }});
-    if(!res.ok) throw new Error("HTTP "+res.status);
+    // 1. URL de l'API officielle
+    const apiTarget = `https://api.football-data.org/v4/competitions/${COMP}/matches?dateFrom=${iso(from)}&dateTo=${iso(to)}`;
+    
+    // 2. Préfixe Proxy pour contourner le blocage GitHub Pages (CORS)
+    const proxy = "https://corsproxy.io/?";
+    
+    // 3. Construction de l'URL finale (Proxy + URL encodée)
+    const url = proxy + encodeURIComponent(apiTarget);
+
+    console.log("Tentative de chargement via proxy..."); // Pour débugger
+
+    const res = await fetch(url, { 
+        headers: { "X-Auth-Token": API_TOKEN } 
+    });
+
+    if(!res.ok) throw new Error("HTTP " + res.status);
+    
     const data = await res.json();
-    const matches = (data.matches||[])
+    
+    const matches = (data.matches || [])
       .filter(m => m.status !== "POSTPONED")
       .sort((a,b)=> new Date(a.utcDate) - new Date(b.utcDate));
+      
     renderFixtures(matches);
-  }catch(e){
+    console.log("Matchs chargés :", matches.length);
+
+  } catch(e) {
+    console.error("Erreur de chargement :", e);
     const empty = document.getElementById("fx-empty");
-    if(empty) empty.hidden=false;
+    if(empty) empty.hidden = false;
+    // Affiche l'erreur dans la page si besoin (optionnel)
+    if(empty) empty.textContent = "Erreur de chargement des données (CORS ou API).";
   }
 }
-loadWeek().catch(()=>{});
+
+// Lancement
+loadWeek().catch(e => console.error(e));
 
 /* Reload à minuit pour mettre à jour la semaine automatiquement */
 (function atMidnight(){
@@ -110,7 +147,6 @@ loadWeek().catch(()=>{});
   next.setHours(24,0,0,0);
   setTimeout(()=>location.reload(), next-now);
 })();
-
 /************************
  * CLASSEMENT (depuis tes JSON) — GLOBAL / DOMICILE / EXTÉRIEUR
  ************************/
@@ -361,4 +397,5 @@ async function initStandingsUnified(){
     }
   }
   initStandingsUnified();
+
   
