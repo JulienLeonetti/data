@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Premier League — Vidéo & Matchs</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header class="pl-header">
+        <div class="pl-wrap">
+          <img class="pl-logo"
+               src="https://upload.wikimedia.org/wikipedia/en/f/f2/Premier_League_Logo.svg"
+               alt="Premier League">
+      
+          <!-- Navigation -->
+          <nav class="pl-nav">
+            <a href="index.html" class="nav-link">Accueil</a>
+            <a href="classement.html" class="nav-link">Classement</a>
+            <a href="equipes.html" class="nav-link">Équipes</a>
+            <a href="comparaison.html" class="nav-link">Comparaison</a>
+            <a href="probabilites.html" class="nav-link">Chances de gagner</a>
+          </nav>
+        </div>
+      </header>
+      <section id="table-card" class="table-card">
+        <div class="table-head">
+          <h2>Classement</h2>
+      
+          <div class="table-controls">
+            <!-- Switch de portée -->
+            <div class="scope-switch" role="tablist" aria-label="Portée du classement">
+              <button class="scope-btn is-active" data-scope="global" role="tab" aria-selected="true">Global</button>
+              <button class="scope-btn" data-scope="home" role="tab" aria-selected="false">Domicile</button>
+              <button class="scope-btn" data-scope="away" role="tab" aria-selected="false">Extérieur</button>
+            </div>
+      
+            <!-- Sélection de saison -->
+            <label class="table-season">
+              <span>Saison</span>
+              <select id="season-select"></select>
+            </label>
+          </div>
+        </div>
+      
+        <div class="table-wrap">
+          <table id="league-table">
+            <thead>
+              <tr>
+                <th>Pos</th>
+                <th class="team-col">Équipe</th>
+                <th>J</th><th>V</th><th>N</th><th>D</th>
+                <th>BP</th><th>BC</th><th>Diff</th><th>Pts</th>
+              </tr>
+            </thead>
+            <tbody><!-- rendu JS --></tbody>
+          </table>
+        </div>
+      </section>
+      
+  
+  
+
+
+
+      <footer class="footer">
+        <div class="logos-track">
+          <div class="logos-slide">
+            <!-- Logos clubs depuis 2006 -->
+            <img src="https://upload.wikimedia.org/wikipedia/en/0/0c/Liverpool_FC.svg" alt="Liverpool">
+            <img src="https://upload.wikimedia.org/wikipedia/en/5/53/Arsenal_FC.svg" alt="Arsenal">
+            <img src="https://upload.wikimedia.org/wikipedia/en/b/b4/Tottenham_Hotspur.svg" alt="Tottenham">
+            <img src="https://upload.wikimedia.org/wikipedia/en/e/eb/Manchester_City_FC_badge.svg" alt="Man City">
+            <img src="https://upload.wikimedia.org/wikipedia/en/7/7a/Manchester_United_FC_crest.svg" alt="Man Utd">
+            <img src="https://upload.wikimedia.org/wikipedia/en/c/cc/Chelsea_FC.svg" alt="Chelsea">
+            <img src="https://upload.wikimedia.org/wikipedia/en/5/56/Newcastle_United_Logo.svg" alt="Newcastle">
+             <img src="logo/everton.png" alt="Everton">
+             <img src="logo/crystal-palace.png" alt="Crystal Palace">
+             <img src="logo/west-ham.png" alt="West Ham">
+             <img src="logo/fulham.png" alt="Fulham">
+             <img src="logo/wolves.png" alt="Wolves">
+             <img src="logo/brighton.png" alt="Brighton">
+             <img src="logo/burnley.png" alt="Burnley">
+             <img src="logo/sheffield.png" alt="Sheffield">
+             <img src="logo/southampton.png" alt="Southampton">
+             <img src="logo/portsmouth.png" alt="Portsmouth">
+             <img src="logo/sunderland.png" alt="Sunderland">
+             <img src="logo/stoke-city.png" alt="Stoke City">
+             <img src="logo/swansea.png" alt="Swansea">
+             <img src="logo/wigan.png" alt="Wigan">
+             <img src="logo/blackpool.png" alt="Blackpool">
+             <img src="logo/hull-city.png" alt="Hull City">
+             <img src="logo/reading.png" alt="Reading">
+             <img src="logo/bolton.png" alt="Bolton">
+             <img src="logo/birmingham.png" alt="Birmingham City">
+             <img src="logo/cardiff.png" alt="Cardiff">
+             <img src="logo/qpr.png" alt="QPR">
+             <img src="logo/west-brom.png" alt="West Brom">
+             <img src="logo/leicester.png" alt="Leicester">
+             <img src="logo/aston-villa.png" alt="Aston Villa">
+          </div>
+          <!-- duplication pour défilement infini -->
+          <div class="logos-slide" aria-hidden="true">
+            <!-- même contenu que ci-dessus -->
+          </div>
+        </div>
+      </footer>
+    
+      
+      <script src="app.js" defer></script>
+    
+    </body>
+    </html>

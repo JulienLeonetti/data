@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Premier League — Vidéo & Matchs</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- HEADER -->
+  <header class="pl-header">
+    <div class="pl-wrap">
+      <img class="pl-logo"
+           src="https://upload.wikimedia.org/wikipedia/en/f/f2/Premier_League_Logo.svg"
+           alt="Premier League">
+      <nav class="pl-nav">
+        <a href="index.html" class="nav-link">Accueil</a>
+        <a href="classement.html" class="nav-link">Classement</a>
+        <a href="equipes.html" class="nav-link">Équipes</a>
+        <a href="comparaison.html" class="nav-link">Comparaison</a>
+        <a href="probabilites.html" class="nav-link">Probabilites</a>
+        <a href="probabilites.html" class="nav-link">Chances de gagner</a>
+      </nav>
+    </div>
+  </header>
+
+
+  <main class="content">
+    <section class="feature">
+      <div class="feature-card">
+        <div class="feature-media">
+          <video class="feature-video" autoplay muted loop playsinline>
+            <source src="intro-pl.mp4" type="video/mp4" />
+            Votre navigateur ne supporte pas la vidéo.
+          </video>
+        </div>
+      </div>
+    </section>
+  </main>
+
+
+  <section class="fixtures">
+    <div class="fx-head">
+      <h2>Premier League</h2>
+      <div id="week-range" class="fx-range"></div>
+    </div>
+    <div id="fixtures" class="fx-wrap" aria-live="polite"></div>
+    <div id="fx-empty" class="fx-empty" hidden>Aucun match cette semaine.</div>
+  </section>
+
+
+  <footer class="footer">
+    <div class="logos-track">
+      <div class="logos-slide">
+        <img src="https://upload.wikimedia.org/wikipedia/en/0/0c/Liverpool_FC.svg" alt="Liverpool">
+        <img src="https://upload.wikimedia.org/wikipedia/en/5/53/Arsenal_FC.svg" alt="Arsenal">
+        <img src="https://upload.wikimedia.org/wikipedia/en/b/b4/Tottenham_Hotspur.svg" alt="Tottenham">
+        <img src="https://upload.wikimedia.org/wikipedia/en/e/eb/Manchester_City_FC_badge.svg" alt="Man City">
+        <img src="https://upload.wikimedia.org/wikipedia/en/7/7a/Manchester_United_FC_crest.svg" alt="Man Utd">
+        <img src="https://upload.wikimedia.org/wikipedia/en/c/cc/Chelsea_FC.svg" alt="Chelsea">
+        <img src="https://upload.wikimedia.org/wikipedia/en/5/56/Newcastle_United_Logo.svg" alt="Newcastle">
+
+        <img src="logo/everton.png" alt="Everton">
+        <img src="logo/crystal-palace.png" alt="Crystal Palace">
+        <img src="logo/west-ham.png" alt="West Ham">
+        <img src="logo/fulham.png" alt="Fulham">
+        <img src="logo/wolves.png" alt="Wolves">
+        <img src="logo/brighton.png" alt="Brighton">
+        <img src="logo/burnley.png" alt="Burnley">
+        <img src="logo/sheffield.png" alt="Sheffield">
+        <img src="logo/southampton.png" alt="Southampton">
+        <img src="logo/portsmouth.png" alt="Portsmouth">
+        <img src="logo/sunderland.png" alt="Sunderland">
+        <img src="logo/stoke-city.png" alt="Stoke City">
+        <img src="logo/swansea.png" alt="Swansea">
+        <img src="logo/wigan.png" alt="Wigan">
+        <img src="logo/blackpool.png" alt="Blackpool">
+        <img src="logo/hull-city.png" alt="Hull City">
+        <img src="logo/reading.png" alt="Reading">
+        <img src="logo/bolton.png" alt="Bolton">
+        <img src="logo/birmingham.png" alt="Birmingham City">
+        <img src="logo/cardiff.png" alt="Cardiff">
+        <img src="logo/qpr.png" alt="QPR">
+        <img src="logo/west-brom.png" alt="West Brom">
+        <img src="logo/leicester.png" alt="Leicester">
+        <img src="logo/aston-villa.png" alt="Aston Villa">
+        <img src="logo/blackburn.png" alt="Blackburn Rovers">
+        <img src="logo/huddersfield.png" alt="Huddersfield Town">
+        <img src="logo/derby.png" alt="Derby County">
+        <img src="logo/charlton.png" alt="Charlton Athletic">
+        <img src="logo/norwich.png" alt="Norwich City">
+        <img src="logo/watford.png" alt="Watford">
+        <img src="logo/middlesbrough.png" alt="Middlesbrough">
+        <img src="logo/bournemouth.png" alt="Bournemouth">
+      </div>
+      
+      <div class="logos-slide" aria-hidden="true">
+       
+      </div>
+    </div>
+  </footer>
+
+  <script src="app.js" defer></script>
+</body>
+</html>

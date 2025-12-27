@@ -1,0 +1,254 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Premier League — Chances de gagner</title>
+  <link rel="stylesheet" href="style.css">
+
+  <style>
+    /* ===== LAYOUT GLOBAL ===== */
+    .duel-wrapper {
+      max-width: 1100px;
+      margin: 150px auto 120px;
+      padding: 28px 28px 32px;
+      background: var(--card);
+      border-radius: var(--radius);
+      outline: 1px solid #d971ff;
+      box-shadow:
+        0 0 6px #d971ff,
+        0 0 12px rgba(217,113,255,.6),
+        0 0 20px rgba(217,113,255,.4);
+    }
+
+    .duel-header {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .duel-header h1 {
+      font-size: 28px;
+      margin-bottom: 8px;
+    }
+
+    .duel-header p {
+      opacity: .9;
+      font-size: 14px;
+      line-height: 1.5;
+      max-width: 640px;
+      margin: 0 auto;
+    }
+
+    /* ===== CONTROLES (ÉQUIPE A / B) ===== */
+    .duel-controls {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      align-items: center;
+      justify-content: center;
+      margin: 18px 0 6px;
+    }
+
+    .duel-controls > div {
+      min-width: 200px;
+      text-align: left;
+    }
+
+    .duel-controls label {
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      opacity: .75;
+      display: block;
+      margin-bottom: 4px;
+    }
+
+    .duel-select {
+      appearance: none;
+      background: #32083a;
+      color: #fff;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,.15);
+      padding: 8px 18px;
+      font-weight: 700;
+      font-size: 14px;
+      outline: none;
+      width: 100%;
+      transition: all .25s ease;
+      cursor: pointer;
+    }
+
+    .duel-select:hover {
+      background: #fff;
+      color: #32083a;
+      border-color: #32083a;
+    }
+
+    .duel-select:focus-visible {
+      background: #fff;
+      color: #32083a;
+      border-color: #d971ff;
+      box-shadow: 0 0 0 3px rgba(217,113,255,.35);
+    }
+
+    /* ===== GRAPHIQUE ===== */
+    #duelChart {
+      width: 100%;
+      height: 420px;
+      margin-top: 12px;
+    }
+
+    .duel-result {
+      margin-top: 10px;
+      font-size: 14px;
+      text-align: center;
+    }
+
+    .duel-result strong {
+      font-weight: 700;
+    }
+
+    .duel-warning {
+  margin-top: 24px;
+  margin-bottom: 8px;
+  max-width: 900px;
+  margin-left: auto;
+  margin-right: auto;
+
+  padding: 12px 18px;
+  font-size: 14px;
+  line-height: 1.5;
+  text-align: center;
+
+  color: #ffe5ef;
+  background: rgba(255, 99, 132, 0.18);
+  border-radius: 12px;
+  border: 1px solid rgba(255, 99, 132, 0.65);
+
+  display: none; /* JS l'affiche quand il y a un message */
+}
+
+
+    @media (max-width: 900px) {
+      .duel-wrapper {
+        margin: 130px 12px 80px;
+        padding: 20px 16px 24px;
+      }
+
+      #duelChart {
+        height: 360px;
+      }
+    }
+  </style>
+
+  <script src="https://cdn.jsdelivr.net/npm/echarts@5/dist/echarts.min.js"></script>
+</head>
+
+<body>
+  <!-- HEADER -->
+  <header class="pl-header">
+    <div class="pl-wrap">
+      <img class="pl-logo"
+           src="https://upload.wikimedia.org/wikipedia/en/f/f2/Premier_League_Logo.svg"
+           alt="Premier League">
+      <nav class="pl-nav">
+        <a href="index.html" class="nav-link">Accueil</a>
+        <a href="classement.html" class="nav-link">Classement</a>
+        <a href="equipes.html" class="nav-link">Équipes</a>
+        <a href="comparaison.html" class="nav-link">Comparaison</a>
+        <a href="probabilites.html" class="nav-link">Chances de gagner</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- CONTENU -->
+  <main class="duel-wrapper">
+    <div class="duel-header">
+      <h1>Qui a le plus de chances de gagner ?</h1>
+      <p>
+        Choisis deux clubs de Premier League. On calcule pour chacun sa
+        <strong>probabilité moyenne de victoire</strong> à partir des données historiques,
+        puis on estime leurs chances de gagner l’un contre l’autre.
+      </p>
+    </div>
+
+    <div class="duel-controls">
+        <div class="duel-group">
+          <label for="duelTeamA">ÉQUIPE A</label>
+          <select id="duelTeamA" class="duel-select"></select>
+      
+          <label for="duelSeasonA" class="duel-sub-label">Saison</label>
+          <select id="duelSeasonA" class="duel-select"></select>
+        </div>
+      
+        <div class="duel-group">
+          <label for="duelTeamB">ÉQUIPE B</label>
+          <select id="duelTeamB" class="duel-select"></select>
+      
+          <label for="duelSeasonB" class="duel-sub-label">Saison</label>
+          <select id="duelSeasonB" class="duel-select"></select>
+        </div>
+      </div>
+      
+
+    <div id="duelChart" aria-label="Probabilités de victoire pour les deux équipes"></div>
+
+    <div id="duel-warning" class="duel-warning">
+      ⚠ Tu as sélectionné deux fois la même équipe, les probabilités sont alors 50% / 50%.
+    </div>
+
+    <div id="duel-result" class="duel-result"></div>
+  </main>
+
+  <footer class="footer">
+    <div class="logos-track">
+      <div class="logos-slide">
+        <img src="https://upload.wikimedia.org/wikipedia/en/0/0c/Liverpool_FC.svg" alt="Liverpool">
+        <img src="https://upload.wikimedia.org/wikipedia/en/5/53/Arsenal_FC.svg" alt="Arsenal">
+        <img src="https://upload.wikimedia.org/wikipedia/en/b/b4/Tottenham_Hotspur.svg" alt="Tottenham">
+        <img src="https://upload.wikimedia.org/wikipedia/en/e/eb/Manchester_City_FC_badge.svg" alt="Man City">
+        <img src="https://upload.wikimedia.org/wikipedia/en/7/7a/Manchester_United_FC_crest.svg" alt="Man Utd">
+        <img src="https://upload.wikimedia.org/wikipedia/en/c/cc/Chelsea_FC.svg" alt="Chelsea">
+        <img src="https://upload.wikimedia.org/wikipedia/en/5/56/Newcastle_United_Logo.svg" alt="Newcastle">
+
+        <img src="logo/everton.png" alt="Everton">
+        <img src="logo/crystal-palace.png" alt="Crystal Palace">
+        <img src="logo/west-ham.png" alt="West Ham">
+        <img src="logo/fulham.png" alt="Fulham">
+        <img src="logo/wolves.png" alt="Wolves">
+        <img src="logo/brighton.png" alt="Brighton">
+        <img src="logo/burnley.png" alt="Burnley">
+        <img src="logo/sheffield.png" alt="Sheffield">
+        <img src="logo/southampton.png" alt="Southampton">
+        <img src="logo/portsmouth.png" alt="Portsmouth">
+        <img src="logo/sunderland.png" alt="Sunderland">
+        <img src="logo/stoke-city.png" alt="Stoke City">
+        <img src="logo/swansea.png" alt="Swansea">
+        <img src="logo/wigan.png" alt="Wigan">
+        <img src="logo/blackpool.png" alt="Blackpool">
+        <img src="logo/hull-city.png" alt="Hull City">
+        <img src="logo/reading.png" alt="Reading">
+        <img src="logo/bolton.png" alt="Bolton">
+        <img src="logo/birmingham.png" alt="Birmingham City">
+        <img src="logo/cardiff.png" alt="Cardiff">
+        <img src="logo/qpr.png" alt="QPR">
+        <img src="logo/west-brom.png" alt="West Brom">
+        <img src="logo/leicester.png" alt="Leicester">
+        <img src="logo/aston-villa.png" alt="Aston Villa">
+        <img src="logo/blackburn.png" alt="Blackburn Rovers">
+        <img src="logo/huddersfield.png" alt="Huddersfield Town">
+        <img src="logo/derby.png" alt="Derby County">
+        <img src="logo/charlton.png" alt="Charlton Athletic">
+        <img src="logo/norwich.png" alt="Norwich City">
+        <img src="logo/watford.png" alt="Watford">
+        <img src="logo/middlesbrough.png" alt="Middlesbrough">
+        <img src="logo/bournemouth.png" alt="Bournemouth">
+      </div>
+      
+      <div class="logos-slide" aria-hidden="true">
+       
+      </div>
+    </div>
+  <script src="probabilites.js" defer></script>
+</body>
+</html>

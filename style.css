@@ -1,0 +1,3239 @@
+:root {
+    --pl-header-bg:#37003c;     /* header foncé */
+    --pl-bg:#522b5b;            /* fond page */
+    --card:#2a0530;             /* carte */
+    --card-alt:#32083a;
+    --radius:22px;
+    --shadow:0 10px 30px rgba(0,0,0,.35);
+  }
+  
+  /* reset */
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  /* BODY */
+  body {
+    background: var(--pl-bg);
+    color: #fff;
+    font-family: system-ui, Segoe UI, Roboto, Arial;
+    padding-top: 100px;   /* évite que le contenu passe sous le header fixe */
+    padding-bottom: 80px; /* laisse de la place pour voir le footer */
+  }
+  
+  /* HEADER */
+  .pl-header {
+    background: var(--pl-header-bg);
+    padding: 20px;
+    position: fixed;   /* fixé en haut */
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;     /* reste au-dessus du reste */
+    box-shadow: 0 2px 12px rgba(0,0,0,0.3); /* ombre légère */
+  }
+  .pl-wrap {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 60px; /* espace logo ↔ menu */
+  }
+  
+  .pl-logo {
+    height: 60px;
+    filter: brightness(0) invert(1);
+  }
+  
+  /* Navigation */
+  .pl-nav {
+    display: flex;
+    align-items: center;
+    gap: 30px; /* espace entre les liens */
+  }
+  
+  .nav-link {
+    color: #fff;
+    font-weight: 700;
+    font-size: 19px;   /* ← plus gros texte */
+    text-decoration: none;
+    padding: 8px 20px; /* padding un peu plus grand pour équilibrer */
+    border-radius: 999px;
+    transition: all 0.3s ease;
+  }
+  
+  .nav-link:hover {
+    background: #fff;
+    color: #37003c; /* violet foncé */
+  }
+  
+  
+  /* LAYOUT */
+  body{text-align:center;}
+  .content, .fixtures {
+    display:inline-block;
+    vertical-align:top;
+    width:min(880px, 46vw);
+    margin:100px 15px 60px;  /* Avant 30px → maintenant 100px */
+    text-align:initial;
+  }
+  
+ 
+  /* VIDÉO */
+  .feature-card{width:100%;display:flex;}
+  .feature-media{
+    position:relative;width:100%;
+    aspect-ratio:16/9;
+    overflow:hidden;border-radius:var(--radius);
+    outline:3px solid rgba(255,255,255,.06);
+    box-shadow:var(--shadow);
+  }
+  .feature-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;}
+  
+  /* FIXTURES */
+  .fixtures{
+    background:var(--card);
+    border-radius:var(--radius);
+    outline:2px solid rgba(255,255,255,.06);
+    box-shadow:var(--shadow);
+    aspect-ratio:16/9;
+    overflow:hidden;
+    padding:18px;
+    color:#fff;
+  }
+  .fx-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:8px}
+  .fx-head h2{font-size:20px;font-weight:800}
+  .fx-range{opacity:.8;font-size:14px}
+  
+  .fx-wrap{height:calc(100% - 42px);overflow:auto;padding-right:6px}
+  .fx-day{margin:12px 2px 6px;font-weight:800;opacity:.9}
+  .fx-list{background:var(--card-alt);border-radius:14px;padding:8px 14px}
+  
+  .fx-item{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:16px;padding:12px 0}
+  .fx-sep{height:1px;background:rgba(255,255,255,.08);margin:0 6px;border-radius:1px}
+  
+  .fx-team{display:flex;align-items:center;gap:10px;min-width:0;font-weight:600}
+  .fx-team span{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .fx-team.away{justify-content:flex-end}
+  .fx-logo{width:26px;height:26px;border-radius:50%;object-fit:contain;background:#190221}
+  
+  .fx-kick{min-width:64px;text-align:center;font-weight:900;letter-spacing:.2px;
+    padding:2px 10px;border-radius:999px;background:rgba(255,255,255,.08);}
+  .fx-empty{padding:20px 6px;text-align:center;opacity:.8}
+  
+  /* Responsive */
+  @media (max-width:1100px){
+    body{text-align:initial;}
+    .content, .fixtures{
+      display:block;width:min(980px, 96vw);margin:20px auto;
+      aspect-ratio:auto;
+    }
+    .fx-wrap{height:auto;max-height:60vh}
+  }
+  /* Effet néon mauve fluo léger */
+.feature-media,
+.fixtures {
+  outline: 1px solid #d971ff; /* contour mauve clair fin */
+  box-shadow:
+    0 0 6px #d971ff,
+    0 0 12px rgba(217,113,255,0.6),
+    0 0 20px rgba(217,113,255,0.4);
+  border-radius: 22px;
+}
+
+  /* ===== FOOTER ===== */
+  .footer {
+    background: #37003c;
+    overflow: hidden;
+    padding: 12px 0;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    z-index: 100;
+  }
+  
+  .logos-track {
+    display: flex;
+    width: max-content;
+    animation: scroll-left 60s linear infinite;
+  }
+  
+  .logos-slide {
+    display: flex;
+    gap: 90px;
+    padding-right: 32px;
+  }
+  
+  .footer img {
+    height: 40px;
+    width: auto;
+    display: block;
+  }
+  
+  /* Animation défilement */
+  @keyframes scroll-left {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+ /* ===== Classement (tables GLOBAL / HOME / AWAY) ===== */
+.table-card{
+    width:min(980px, 96vw);
+    margin: 30px auto 110px;          /* marge basse pour le footer fixe */
+    background:#2a0530;
+    color:#fff;
+    border-radius:22px;
+    outline:1px solid #d971ff;        /* lueur mauve */
+    box-shadow: 0 0 6px #d971ff, 0 0 12px rgba(217,113,255,.6), 0 0 20px rgba(217,113,255,.4);
+    padding:16px 16px 12px;
+  }
+  
+  .table-head{
+    display:flex; align-items:center; justify-content:space-between; gap:16px;
+    margin-bottom:8px;
+  }
+  .table-head h2{ font-size:20px; font-weight:800; }
+  
+  .table-season{
+    display:flex; align-items:center; gap:8px; opacity:.95;
+  }
+  .table-season span{ font-size:14px; }
+  
+  /* --- Sélecteurs de saison partagés ---
+     cible tous les <select> dont l'id commence par "season-select" */
+  [id^="season-select"]{
+    appearance:none;
+    background:#32083a; color:#fff;
+    border:1px solid rgba(255,255,255,.15);
+    border-radius:12px; padding:6px 12px;
+    font-weight:700; transition:all .25s ease;
+    outline:none;
+  }
+  [id^="season-select"]:hover{
+    background:#fff; color:#32083a; border-color:#32083a;
+  }
+  [id^="season-select"]:focus-visible{
+    background:#fff; color:#32083a; border-color:#d971ff;
+    box-shadow:0 0 0 3px rgba(217,113,255,.35);
+  }
+  [id^="season-select"]:disabled{
+    opacity:.6; cursor:not-allowed;
+  }
+  
+  /* --- Tables partagées ---
+     cible tous les <table> dont l’id commence par "league-table" */
+  .table-wrap{ overflow:auto; }
+  [id^="league-table"]{ width:100%; border-collapse:collapse; min-width:680px; }
+  
+  [id^="league-table"] thead th{
+    font-size:12px; text-transform:uppercase; opacity:.85; letter-spacing:.4px;
+    text-align:right; padding:10px 8px; position:sticky; top:0;
+    background:#2a0530; /* même fond que la carte pour éviter le décalage au scroll */
+  }
+  [id^="league-table"] thead th.team-col{ text-align:left; }
+  
+  [id^="league-table"] tbody td{
+    padding:10px 8px; text-align:right; border-top:1px solid rgba(255,255,255,.08);
+    font-weight:600; white-space:nowrap;
+  }
+  [id^="league-table"] tbody tr:hover{
+    background:rgba(217,113,255,.06);
+  }
+  [id^="league-table"] tbody td.team{
+    display:flex; align-items:center; gap:10px; text-align:left; min-width:200px;
+  }
+  [id^="league-table"] tbody td:first-child{
+    width:44px; text-align:center; font-weight:800;
+  }
+  
+  .badge{
+    width:22px; height:22px; border-radius:50%; object-fit:contain; background:#190221;
+  }
+  
+  /* Petits écrans */
+  @media (max-width: 1100px){
+    .table-card{ margin: 20px auto 110px; }
+    [id^="league-table"]{ min-width: 620px; }
+  }
+  .table-controls{
+    display:flex; align-items:center; gap:14px; flex-wrap:wrap;
+  }
+  
+  /* Switch Global / Domicile / Extérieur */
+  .scope-switch{
+    display:inline-flex; background:#32083a; border-radius:999px; padding:4px;
+    outline:1px solid rgba(255,255,255,.15);
+  }
+  .scope-btn{
+    border:0; background:transparent; color:#fff; font-weight:800;
+    padding:8px 14px; border-radius:999px; cursor:pointer; transition:all .2s ease;
+  }
+  .scope-btn:hover{ background:rgba(255,255,255,.12); }
+  .scope-btn.is-active{
+    background:#fff; color:#32083a; box-shadow:0 2px 10px rgba(0,0,0,.2);
+  }
+  
+  /* Select de saison (réutilise ta règle existante si tu l'as déjà) */
+  #season-select{
+    appearance:none; background:#32083a; color:#fff;
+    border:1px solid rgba(255,255,255,.15);
+    border-radius:12px; padding:6px 12px; font-weight:700;
+    transition:all .25s ease; outline:none;
+  }
+  #season-select:hover{ background:#fff; color:#32083a; border-color:#32083a; }
+  #season-select:focus-visible{
+    background:#fff; color:#32083a; border-color:#d971ff;
+    box-shadow:0 0 0 3px rgba(217,113,255,.35);
+  }
+    
+  .teams-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* toujours 3 colonnes */
+    gap: 30px;                              /* espace entre les cartes */
+    margin: 40px auto;
+    max-width: 1200px;                      /* largeur max de la grille */
+    padding: 0 20px;
+  }
+  
+  .team-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;  /* centre logo + texte */
+    gap: 16px;
+  
+    background: #32083a;
+    border-radius: 20px;
+    padding: 40px 20px;       /* cartes plus grandes */
+    text-decoration: none;
+    color: #fff;
+    font-weight: 700;
+    font-size: 18px;          /* texte plus gros */
+    text-align: center;
+  
+    transition: all 0.3s ease;
+    outline: 1px solid rgba(255,255,255,.15);
+  
+    /* lueur mauve */
+    box-shadow:
+      0 0 6px #d971ff,
+      0 0 12px rgba(217,113,255,0.6),
+      0 0 20px rgba(217,113,255,0.4);
+  }
+  
+  .team-card img {
+    width: 100px;  /* logo plus grand */
+    height: 100px;
+    border-radius: 50%;
+    object-fit: contain;
+    background: #190221;
+  }
+  
+  .team-card:hover {
+    background: #d971ff;   /* mauve clair au survol */
+    color: #32083a;
+    transform: translateY(-6px);
+    box-shadow:
+      0 0 10px #d971ff,
+      0 0 20px rgba(217,113,255,0.8),
+      0 0 30px rgba(217,113,255,0.6);
+  }
+  /* Fix affichage du bandeau titre / sous-titre */
+.card p { 
+  letter-spacing: 0; 
+  word-spacing: 0; 
+  white-space: normal;
+}
+
+/* Empêche les espacements bizarres sur le code inline */
+code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
+  font-size: 0.95em;
+  letter-spacing: 0;
+  word-spacing: 0;
+  text-transform: none;
+  font-variant-ligatures: none;
+}
+
+/* Aligne proprement le badge “Saison” à côté du titre */
+.card h2 {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.badge {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+  .lfc-wrap{max-width:1200px;margin:0 auto;padding:24px 16px}
+  .lfc-card{background:var(--card);border-radius:var(--radius);outline:2px solid rgba(255,255,255,.06);box-shadow:var(--shadow);padding:18px;margin:18px 0;color:#fff}
+  .lfc-card h2{font-size:18px;font-weight:800;margin-bottom:10px;display:flex;align-items:center;gap:8px}
+  .lfc-badge{padding:2px 10px;border-radius:999px;background:rgba(255,255,255,.1);font-size:12px;font-weight:700}
+  .lfc-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+  @media (max-width:980px){ .lfc-grid{grid-template-columns:1fr} }
+  .lfc-kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:14px;margin-top:10px}
+  .lfc-kpi{background:var(--card-alt);border-radius:16px;padding:14px;position:relative;overflow:hidden}
+  .lfc-kpi h3{font-size:12px;opacity:.8;margin-bottom:6px}
+  .lfc-kpi .num{font-size:34px;font-weight:900;letter-spacing:.5px}
+  .lfc-glow{position:absolute;inset:auto -40% -40% auto;width:220px;height:220px;background:radial-gradient(closest-side,rgba(1,254,135,.30),transparent 70%);filter:blur(30px);animation:lfcPulse 3s ease-in-out infinite}
+  @keyframes lfcPulse{0%,100%{transform:scale(.9)}50%{transform:scale(1.1)}}
+  .lfc-chart{height:360px}
+/* ===== Sidebar Liverpool — version large et esthétique ===== */
+:root{
+  --sidebar-w: 420px;           /* largeur colonne gauche */
+  --sidebar-gap: 28px;          /* espace sidebar ↔ contenu */
+  --header-h: 100px;
+  --lfc-red: #c8102e;           /* rouge Liverpool officiel */
+  --lfc-bordeaux: #5a0a17;      /* bordeaux profond */
+}
+
+/* Taille & position */
+.lfc-sidebar{
+  position: fixed;
+  top: calc(var(--header-h) + 16px);
+  left: 24px;
+  width: var(--sidebar-w);
+  z-index: 10;
+}
+
+/* Carte / panneau */
+.lfc-side-card{
+  position: relative;
+  background: linear-gradient(160deg, var(--lfc-red) 0%, #a40f25 45%, var(--lfc-bordeaux) 100%);
+  color:#fff;
+  border-radius: 22px;
+  padding: 18px 16px;
+  outline: 1px solid rgba(255,255,255,.12);
+  box-shadow:
+    0 14px 36px rgba(0,0,0,.35),
+    inset 0 1px 0 rgba(255,255,255,.10);
+}
+
+/* léger reflet esthétique */
+.lfc-side-card::before{
+  content:"";
+  position:absolute; inset:0;
+  background: radial-gradient(120% 60% at -10% -20%, rgba(255,255,255,.18), transparent 50%),
+              radial-gradient(80% 50% at 120% 0%, rgba(255,255,255,.06), transparent 60%);
+  border-radius: inherit;
+  pointer-events:none;
+}
+
+.lfc-side-head{ display:flex; align-items:center; gap:14px; margin-bottom:10px; }
+.lfc-side-logo{ width:72px; height:auto; filter: drop-shadow(0 4px 8px rgba(0,0,0,.35)); }
+.lfc-side-title{ margin:0; font-size:22px; line-height:1.05; }
+.lfc-side-sub{ margin:4px 0 0; opacity:.95; font-size:15px; }
+
+.lfc-side-mapwrap{
+  overflow:hidden; border-radius:14px;
+  outline:1px solid rgba(255,255,255,.18);
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,.06);
+}
+.lfc-side-map{ width:100%; height:300px; border:0; }  /* ← plus grand */
+
+.lfc-side-meta{
+  display:flex; justify-content:space-between; align-items:center;
+  margin-top:10px; font-size:14px; opacity:.95;
+}
+.lfc-side-link{
+  color:#ffe6ea; text-decoration:none;
+  padding:6px 12px; border-radius:12px;
+  border:1px solid rgba(255,255,255,.28);
+  background: linear-gradient(180deg, rgba(255,255,255,.12), rgba(255,255,255,.05));
+}
+.lfc-side-link:hover{ background: rgba(255,255,255,.18); color:#fff; }
+
+/* Décale le contenu principal pour laisser la place à la sidebar élargie */
+.lfc-wrap{
+  margin-left: calc(var(--sidebar-w) + var(--sidebar-gap));
+}
+
+/* Responsive : au-dessous de 1250px, la sidebar passe au-dessus du contenu */
+@media (max-width: 1250px){
+  .lfc-sidebar{ position: static; width: min(980px, 96vw); margin: 0 auto 16px; }
+  .lfc-wrap{ margin-left: auto; }
+  .lfc-side-map{ height: 240px; }
+}
+/* === Panneau Classement (sous la sidebar) === */
+:root{
+  --sidebar-w: 420px;   /* même largeur que ta sidebar carte */
+}
+
+.lfc-sidebar-standings{
+  position: fixed;
+  left: 24px;
+  top: calc(var(--header-h) + 16px + 420px + 24px); /* sous la carte (~420px hauteur) */
+  width: var(--sidebar-w);
+  z-index: 9;
+}
+
+/* si ta carte est plus haute, descend un peu : ajuste le 420px ci-dessus */
+
+.lfc-side-standings-card{
+  background: #2a0530;
+  color:#fff;
+  border-radius: 18px;
+  padding: 14px;
+  outline: 1px solid rgba(255,255,255,.12);
+  box-shadow: 0 14px 36px rgba(0,0,0,.35);
+}
+
+.lfc-stand-head{
+  display:flex; justify-content:space-between; align-items:center; gap:10px;
+  margin-bottom:8px;
+}
+.lfc-stand-head h3{ margin:0; font-size:18px; }
+.lfc-stand-season{ display:flex; align-items:center; gap:8px; opacity:.95; }
+.lfc-stand-season span{ font-size:.9rem; }
+.lfc-stand-season select{
+  appearance:none; background:#3a0a42; color:#fff; border:1px solid rgba(255,255,255,.18);
+  border-radius:10px; padding:6px 10px; font-weight:700; outline:none;
+}
+
+.lfc-stand-wrap{ overflow:auto; }
+.lfc-stand-table{ width:100%; border-collapse:collapse; font-size:13px; }
+.lfc-stand-table thead th{
+  text-align:right; padding:8px 6px; opacity:.8; position:sticky; top:0; background:#2a0530;
+}
+.lfc-stand-table thead th.team-col{ text-align:left; }
+.lfc-stand-table tbody td{
+  padding:8px 6px; border-top:1px solid rgba(255,255,255,.08); text-align:right; font-weight:600;
+}
+.lfc-stand-table tbody td:first-child{ width:34px; text-align:center; font-weight:800; }
+.lfc-stand-table tbody td.team{
+  text-align:left; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; max-width: 0;
+}
+.lfc-stand-table tbody tr:hover{ background: rgba(217,113,255,.06); }
+
+/* Mise en évidence Liverpool */
+.lfc-stand-table tbody tr.is-lfc{
+  background: linear-gradient(180deg, #c8102e33, #c8102e22);
+  outline: 1px solid rgba(200,16,46,.55);
+  box-shadow: 0 0 0 2px rgba(200,16,46,.25) inset;
+}
+.lfc-stand-table tbody tr.is-lfc td{
+  font-weight:900; color:#fff;
+}
+
+/* Nota si LFC hors top 10 */
+.lfc-stand-note{
+  margin-top:10px; font-size:.85rem; opacity:.9;
+  background: rgba(255,255,255,.06); border-radius:10px; padding:8px 10px;
+}
+
+/* Responsive : en dessous de 1250px on empile */
+@media (max-width: 1250px){
+  .lfc-sidebar-standings{
+    position: static;
+    width: min(980px, 96vw);
+    margin: 10px auto 16px;
+    top: auto; left:auto;
+  }
+}
+/* --- paramètres sidebar --- */
+:root{
+  --header-h: 100px;             /* déjà chez toi */
+  --sidebar-w: 420px;            /* largeur colonne gauche */
+  --side-map-height: 420px;      /* hauteur approximative du bloc carte */
+  --side-gap: 28px;              /* ESPACE entre carte et classement */
+}
+
+/* Carte (inchangé) ... */
+
+/* Classement : descend sous la carte avec un vrai gap */
+.lfc-sidebar-standings{
+  position: fixed;
+  left: 24px;
+  top: calc(var(--header-h) + 16px + var(--side-map-height) + var(--side-gap));
+  width: var(--sidebar-w);
+  z-index: 9;
+}
+
+/* Petite respiration visuelle dans la carte et le tableau */
+.lfc-side-standings-card{ margin-top: 0; }              /* propre */
+.lfc-side-card{ padding-bottom: 16px; }                 /* carte */
+.lfc-stand-head{ margin-bottom: 10px; }                 /* en-tête */
+.lfc-stand-wrap{ overflow: visible; }                   /* pas de coupe */
+
+@media (max-width: 1250px){
+  .lfc-sidebar-standings{
+    position: static;
+    width: min(980px, 96vw);
+    margin: 12px auto 16px; /* écart sous la carte quand empilé */
+    top: auto; left: auto;
+  }
+}
+/* ===== Sidebar Manchester City — version large et esthétique ===== */
+:root{
+  --sidebar-w: 420px;           /* largeur colonne gauche */
+  --sidebar-gap: 28px;          /* espace sidebar ↔ contenu */
+  --header-h: 100px;
+
+  /* Palette Manchester City */
+  --mc-sky: #6CABDD;            /* bleu ciel */
+  --mc-navy:#001838;            /* bleu marine */
+  --mc-silver:#C8D2DC;          /* gris/argent */
+}
+
+/* Taille & position */
+.mc-sidebar{
+  position: fixed;
+  top: calc(var(--header-h) + 16px);
+  left: 24px;
+  width: var(--sidebar-w);
+  z-index: 10;
+}
+
+/* Carte / panneau */
+.mc-side-card{
+  position: relative;
+  background: linear-gradient(160deg, var(--mc-sky) 0%, #4da2df 45%, var(--mc-navy) 100%);
+  color:#fff;
+  border-radius: 22px;
+  padding: 18px 16px;
+  outline: 1px solid rgba(255,255,255,.14);
+  box-shadow:
+    0 14px 36px rgba(0,0,0,.35),
+    inset 0 1px 0 rgba(255,255,255,.10);
+}
+
+/* léger reflet esthétique */
+.mc-side-card::before{
+  content:"";
+  position:absolute; inset:0;
+  background: radial-gradient(120% 60% at -10% -20%, rgba(255,255,255,.20), transparent 50%),
+              radial-gradient(80% 50% at 120% 0%, rgba(255,255,255,.08), transparent 60%);
+  border-radius: inherit;
+  pointer-events:none;
+}
+
+.mc-side-head{ display:flex; align-items:center; gap:14px; margin-bottom:10px; }
+.mc-side-logo{ width:72px; height:auto; filter: drop-shadow(0 4px 8px rgba(0,0,0,.35)); }
+.mc-side-title{ margin:0; font-size:22px; line-height:1.05; }
+.mc-side-sub{ margin:4px 0 0; opacity:.96; font-size:15px; }
+
+.mc-side-mapwrap{
+  overflow:hidden; border-radius:14px;
+  outline:1px solid rgba(255,255,255,.20);
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,.07);
+}
+.mc-side-map{ width:100%; height:300px; border:0; }  /* ← plus grand */
+
+.mc-side-meta{
+  display:flex; justify-content:space-between; align-items:center;
+  margin-top:10px; font-size:14px; opacity:.96;
+}
+.mc-side-link{
+  color:#001838; text-decoration:none;
+  padding:6px 12px; border-radius:12px;
+  border:1px solid rgba(255,255,255,.32);
+  background: linear-gradient(180deg, rgba(255,255,255,.22), rgba(255,255,255,.10));
+}
+.mc-side-link:hover{
+  background: rgba(255,255,255,.28);
+  color:#000;
+}
+
+/* Décale le contenu principal pour laisser la place à la sidebar élargie */
+.mc-wrap{
+  margin-left: calc(var(--sidebar-w) + var(--sidebar-gap));
+}
+
+/* Responsive : au-dessous de 1250px, la sidebar passe au-dessus du contenu */
+@media (max-width: 1250px){
+  .mc-sidebar{ position: static; width: min(980px, 96vw); margin: 0 auto 16px; }
+  .mc-wrap{ margin-left: auto; }
+  .mc-side-map{ height: 240px; }
+}
+
+/* === Panneau Classement (sous la sidebar) === */
+:root{
+  --sidebar-w: 420px;   /* même largeur que ta sidebar carte */
+  --side-map-height: 420px;      /* hauteur approximative du bloc carte */
+  --side-gap: 28px;              /* espace entre carte et classement */
+}
+
+.mc-sidebar-standings{
+  position: fixed;
+  left: 24px;
+  top: calc(var(--header-h) + 16px + var(--side-map-height) + var(--side-gap));
+  width: var(--sidebar-w);
+  z-index: 9;
+}
+
+.mc-side-standings-card{
+  background: linear-gradient(180deg, #0e2247, #0c1c3a);
+  color:#eaf1f6;
+  border-radius: 18px;
+  padding: 14px;
+  outline: 1px solid rgba(200,210,220,.18);
+  box-shadow: 0 14px 36px rgba(0,0,0,.35);
+}
+
+.mc-stand-head{
+  display:flex; justify-content:space-between; align-items:center; gap:10px;
+  margin-bottom:8px;
+}
+.mc-stand-head h3{ margin:0; font-size:18px; }
+.mc-stand-season{ display:flex; align-items:center; gap:8px; opacity:.95; }
+.mc-stand-season span{ font-size:.9rem; }
+.mc-stand-season select{
+  appearance:none; background:#17345f; color:#fff; border:1px solid rgba(255,255,255,.18);
+  border-radius:10px; padding:6px 10px; font-weight:700; outline:none;
+}
+
+.mc-stand-wrap{ overflow:auto; }
+.mc-stand-table{ width:100%; border-collapse:collapse; font-size:13px; }
+.mc-stand-table thead th{
+  text-align:right; padding:8px 6px; opacity:.85; position:sticky; top:0;
+  background: linear-gradient(180deg, #0e2247, #0c1c3a);
+}
+.mc-stand-table thead th.team-col{ text-align:left; }
+.mc-stand-table tbody td{
+  padding:8px 6px; border-top:1px solid rgba(255,255,255,.08); text-align:right; font-weight:600;
+}
+.mc-stand-table tbody td:first-child{ width:34px; text-align:center; font-weight:800; }
+.mc-stand-table tbody td.team{
+  text-align:left; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; max-width: 0;
+}
+.mc-stand-table tbody tr:hover{ background: rgba(108,171,221,.10); }
+
+/* Mise en évidence Manchester City */
+.mc-stand-table tbody tr.is-mc{
+  background: linear-gradient(180deg, rgba(108,171,221,.25), rgba(108,171,221,.15));
+  outline: 1px solid rgba(108,171,221,.55);
+  box-shadow: 0 0 0 2px rgba(108,171,221,.25) inset;
+}
+.mc-stand-table tbody tr.is-mc td{
+  font-weight:900; color:#fff;
+}
+
+/* Nota si City hors top 10 */
+.mc-stand-note{
+  margin-top:10px; font-size:.85rem; opacity:.9;
+  background: rgba(200,210,220,.10); border-radius:10px; padding:8px 10px;
+}
+
+/* Responsive : en dessous de 1250px on empile */
+@media (max-width: 1250px){
+  .mc-sidebar-standings{
+    position: static;
+    width: min(980px, 96vw);
+    margin: 12px auto 16px;
+    top: auto; left:auto;
+  }
+}
+
+/* Petites respirations (mêmes intentions que LFC) */
+.mc-side-standings-card{ margin-top: 0; }
+.mc-side-card{ padding-bottom: 16px; }
+.mc-stand-head{ margin-bottom: 10px; }
+.mc-stand-wrap{ overflow: visible; }
+/* ===== Sidebar Newcastle — version large et esthétique ===== */
+:root{
+  --sidebar-w: 420px;        /* largeur colonne gauche */
+  --sidebar-gap: 28px;       /* espace sidebar ↔ contenu */
+  --header-h: 100px;
+
+  /* Palette Newcastle United */
+  --nufc-black:#0E0E0E;
+  --nufc-charcoal:#1B1B1B;
+  --nufc-gold:#D4AF37;       /* or */
+  --nufc-silver:#C8D2DC;     /* léger accent froid */
+}
+
+/* Taille & position */
+.nufc-sidebar{
+  position: fixed;
+  top: calc(var(--header-h) + 16px);
+  left: 24px;
+  width: var(--sidebar-w);
+  z-index: 10;
+}
+
+/* Carte / panneau */
+.nufc-side-card{
+  position: relative;
+  background: linear-gradient(160deg, var(--nufc-black) 0%, #151515 45%, var(--nufc-charcoal) 100%);
+  color:#fff;
+  border-radius: 22px;
+  padding: 18px 16px;
+  outline: 1px solid rgba(255,255,255,.14);
+  box-shadow:
+    0 14px 36px rgba(0,0,0,.35),
+    inset 0 1px 0 rgba(255,255,255,.10);
+}
+
+/* reflet subtil */
+.nufc-side-card::before{
+  content:"";
+  position:absolute; inset:0;
+  background: radial-gradient(120% 60% at -10% -20%, rgba(255,255,255,.10), transparent 50%),
+              radial-gradient(80% 50% at 120% 0%, rgba(255,255,255,.06), transparent 60%);
+  border-radius: inherit;
+  pointer-events:none;
+}
+
+.nufc-side-head{ display:flex; align-items:center; gap:14px; margin-bottom:10px; }
+.nufc-side-logo{ width:72px; height:auto; filter: drop-shadow(0 4px 8px rgba(0,0,0,.35)); }
+.nufc-side-title{ margin:0; font-size:22px; line-height:1.05; }
+.nufc-side-sub{ margin:4px 0 0; opacity:.95; font-size:15px; }
+
+.nufc-side-mapwrap{
+  overflow:hidden; border-radius:14px;
+  outline:1px solid rgba(255,255,255,.18);
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,.06);
+}
+.nufc-side-map{ width:100%; height:300px; border:0; }
+
+.nufc-side-meta{
+  display:flex; justify-content:space-between; align-items:center;
+  margin-top:10px; font-size:14px; opacity:.96;
+}
+.nufc-side-link{
+  color:#111; text-decoration:none;
+  padding:6px 12px; border-radius:12px;
+  border:1px solid rgba(255,255,255,.28);
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.20), rgba(255,255,255,.08));
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,.05);
+}
+.nufc-side-link:hover{ background: rgba(255,255,255,.24); color:#000; }
+
+/* Liseré or discret autour du panneau */
+.nufc-side-card{ box-shadow:
+  0 14px 36px rgba(0,0,0,.35),
+  inset 0 1px 0 rgba(255,255,255,.10),
+  0 0 0 1px rgba(212,175,55,.28);
+}
+
+/* Décale le contenu principal si tu as un conteneur principal */
+.nufc-wrap{
+  margin-left: calc(var(--sidebar-w) + var(--sidebar-gap));
+}
+
+/* Responsive : au-dessous de 1250px, la sidebar passe au-dessus du contenu */
+@media (max-width: 1250px){
+  .nufc-sidebar{ position: static; width: min(980px, 96vw); margin: 0 auto 16px; }
+  .nufc-wrap{ margin-left: auto; }
+  .nufc-side-map{ height: 240px; }
+}
+/* ===== Sidebar Everton — version large et esthétique ===== */
+:root{
+  --sidebar-w: 420px;
+  --sidebar-gap: 28px;
+  --header-h: 100px;
+
+  /* Palette Everton */
+  --efc-blue:#003DA5;     /* Royal blue Everton */
+  --efc-navy:#012B73;     /* Bleu foncé */
+  --efc-ice:#A7C6ED;      /* Bleu pâle accent */
+}
+
+/* Taille & position */
+.efc-sidebar{
+  position: fixed;
+  top: calc(var(--header-h) + 16px);
+  left: 24px;
+  width: var(--sidebar-w);
+  z-index: 10;
+}
+
+/* Carte / panneau */
+.efc-side-card{
+  position: relative;
+  background: linear-gradient(160deg, var(--efc-blue) 0%, #0b57c5 45%, var(--efc-navy) 100%);
+  color:#fff;
+  border-radius: 22px;
+  padding: 18px 16px;
+  outline: 1px solid rgba(255,255,255,.14);
+  box-shadow:
+    0 14px 36px rgba(0,0,0,.35),
+    inset 0 1px 0 rgba(255,255,255,.10);
+}
+
+/* reflet subtil */
+.efc-side-card::before{
+  content:"";
+  position:absolute; inset:0;
+  background: radial-gradient(120% 60% at -10% -20%, rgba(255,255,255,.18), transparent 50%),
+              radial-gradient(80% 50% at 120% 0%, rgba(255,255,255,.08), transparent 60%);
+  border-radius: inherit; pointer-events:none;
+}
+
+.efc-side-head{ display:flex; align-items:center; gap:14px; margin-bottom:10px; }
+.efc-side-logo{ width:72px; height:auto; filter: drop-shadow(0 4px 8px rgba(0,0,0,.35)); background:#fff0; }
+.efc-side-title{ margin:0; font-size:22px; line-height:1.05; }
+.efc-side-sub{ margin:4px 0 0; opacity:.95; font-size:15px; }
+
+.efc-side-mapwrap{
+  overflow:hidden; border-radius:14px;
+  outline:1px solid rgba(255,255,255,.18);
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,.06);
+}
+.efc-side-map{ width:100%; height:300px; border:0; }
+
+.efc-side-meta{
+  display:flex; justify-content:space-between; align-items:center;
+  margin-top:10px; font-size:14px; opacity:.96;
+}
+.efc-side-link{
+  color:#012B73; text-decoration:none;
+  padding:6px 12px; border-radius:12px;
+  border:1px solid rgba(255,255,255,.28);
+  background: linear-gradient(180deg, rgba(255,255,255,.22), rgba(255,255,255,.10));
+}
+.efc-side-link:hover{ background: rgba(255,255,255,.28); color:#00184e; }
+
+/* Décale le contenu principal quand la sidebar est fixe */
+.efc-wrap{
+  margin-left: calc(var(--sidebar-w) + var(--sidebar-gap));
+}
+
+/* Responsive */
+@media (max-width: 1250px){
+  .efc-sidebar{ position: static; width: min(980px, 96vw); margin: 0 auto 16px; }
+  .efc-wrap{ margin-left: auto; }
+  .efc-side-map{ height: 240px; }
+}
+/* ===== Sidebar Crystal Palace ===== */
+:root{
+  --cpfc-red:#DA2128;       /* Rouge Palace */
+  --cpfc-blue:#0046AE;      /* Bleu Palace */
+  --cpfc-dark:#00235C;      /* Bleu foncé */
+  --sidebar-w: 420px;
+  --sidebar-gap: 28px;
+  --header-h: 100px;
+}
+
+/* Position */
+.cpfc-sidebar{
+  position: fixed;
+  top: calc(var(--header-h) + 16px);
+  left: 24px;
+  width: var(--sidebar-w);
+  z-index: 10;
+}
+
+/* Carte / panneau */
+.cpfc-side-card{
+  position: relative;
+  background: linear-gradient(160deg, var(--cpfc-blue) 0%, #003b91 45%, var(--cpfc-red) 100%);
+  color:#fff;
+  border-radius: 22px;
+  padding: 18px 16px;
+  outline: 1px solid rgba(255,255,255,.15);
+  box-shadow:
+    0 14px 36px rgba(0,0,0,.35),
+    inset 0 1px 0 rgba(255,255,255,.10);
+}
+
+/* reflet */
+.cpfc-side-card::before{
+  content:"";
+  position:absolute; inset:0;
+  background: radial-gradient(120% 60% at -10% -20%, rgba(255,255,255,.18), transparent 50%),
+              radial-gradient(80% 50% at 120% 0%, rgba(255,255,255,.08), transparent 60%);
+  border-radius: inherit;
+  pointer-events:none;
+}
+
+.cpfc-side-head{ display:flex; align-items:center; gap:14px; margin-bottom:10px; }
+.cpfc-side-logo{ width:72px; height:auto; filter: drop-shadow(0 4px 8px rgba(0,0,0,.35)); }
+.cpfc-side-title{ margin:0; font-size:22px; line-height:1.05; }
+.cpfc-side-sub{ margin:4px 0 0; opacity:.95; font-size:15px; }
+
+.cpfc-side-mapwrap{
+  overflow:hidden; border-radius:14px;
+  outline:1px solid rgba(255,255,255,.18);
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,.06);
+}
+.cpfc-side-map{ width:100%; height:300px; border:0; }
+
+.cpfc-side-meta{
+  display:flex; justify-content:space-between; align-items:center;
+  margin-top:10px; font-size:14px; opacity:.95;
+}
+.cpfc-side-link{
+  color:#ffeef0; text-decoration:none;
+  padding:6px 12px; border-radius:12px;
+  border:1px solid rgba(255,255,255,.28);
+  background: linear-gradient(180deg, rgba(255,255,255,.18), rgba(255,255,255,.08));
+}
+.cpfc-side-link:hover{ background: rgba(255,255,255,.25); color:#fff; }
+
+/* Wrap content offset */
+.cpfc-wrap{
+  margin-left: calc(var(--sidebar-w) + var(--sidebar-gap));
+}
+
+/* Responsive */
+@media (max-width: 1250px){
+  .cpfc-sidebar{ position: static; width: min(980px, 96vw); margin: 0 auto 16px; }
+  .cpfc-wrap{ margin-left: auto; }
+  .cpfc-side-map{ height: 240px; }
+}
+/* ===== Sidebar West Ham United ===== */
+:root{
+  --whu-claret:#7A263A;     /* Claret (bordeaux) West Ham */
+  --whu-blue:#1BB1E7;       /* Sky blue */
+  --whu-dark:#3b0e16;       /* Bordeau foncé */
+  --sidebar-w: 420px;
+  --sidebar-gap: 28px;
+  --header-h: 100px;
+}
+
+/* Position */
+.whu-sidebar{
+  position: fixed;
+  top: calc(var(--header-h) + 16px);
+  left: 24px;
+  width: var(--sidebar-w);
+  z-index: 10;
+}
+
+/* Carte / panneau */
+.whu-side-card{
+  position: relative;
+  background: linear-gradient(160deg, var(--whu-claret) 0%, #651d30 45%, var(--whu-blue) 100%);
+  color:#fff;
+  border-radius: 22px;
+  padding: 18px 16px;
+  outline: 1px solid rgba(255,255,255,.15);
+  box-shadow:
+    0 14px 36px rgba(0,0,0,.35),
+    inset 0 1px 0 rgba(255,255,255,.10);
+}
+
+/* Reflet */
+.whu-side-card::before{
+  content:"";
+  position:absolute; inset:0;
+  background: radial-gradient(120% 60% at -10% -20%, rgba(255,255,255,.18), transparent 50%),
+              radial-gradient(80% 50% at 120% 0%, rgba(255,255,255,.08), transparent 60%);
+  border-radius: inherit;
+  pointer-events:none;
+}
+
+/* Layout */
+.whu-side-head{ display:flex; align-items:center; gap:14px; margin-bottom:10px; }
+.whu-side-logo{ width:72px; height:auto; filter: drop-shadow(0 4px 8px rgba(0,0,0,.35)); }
+.whu-side-title{ margin:0; font-size:22px; line-height:1.05; }
+.whu-side-sub{ margin:4px 0 0; opacity:.95; font-size:15px; }
+
+.whu-side-mapwrap{
+  overflow:hidden; border-radius:14px;
+  outline:1px solid rgba(255,255,255,.18);
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,.06);
+}
+.whu-side-map{ width:100%; height:300px; border:0; }
+
+.whu-side-meta{
+  display:flex; justify-content:space-between; align-items:center;
+  margin-top:10px; font-size:14px; opacity:.95;
+}
+.whu-side-link{
+  color:#fff8f9; text-decoration:none;
+  padding:6px 12px; border-radius:12px;
+  border:1px solid rgba(255,255,255,.32);
+  background: linear-gradient(180deg, rgba(255,255,255,.20), rgba(255,255,255,.08));
+}
+.whu-side-link:hover{ background: rgba(255,255,255,.30); color:#fff; }
+
+/* Décalage du contenu */
+.whu-wrap{
+  margin-left: calc(var(--sidebar-w) + var(--sidebar-gap));
+}
+
+/* Responsive */
+@media (max-width: 1250px){
+  .whu-sidebar{ position: static; width: min(980px, 96vw); margin: 0 auto 16px; }
+  .whu-wrap{ margin-left: auto; }
+  .whu-side-map{ height: 240px; }
+}
+/* ===== Sidebar Fulham FC ===== */
+:root{
+  --ffc-white:#ffffff;
+  --ffc-black:#0A0A0A;
+  --ffc-red:#D50000;          /* Rouge Fulham */
+  --sidebar-w: 420px;
+  --sidebar-gap: 28px;
+  --header-h: 100px;
+}
+
+/* Position */
+.ffc-sidebar{
+  position: fixed;
+  top: calc(var(--header-h) + 16px);
+  left: 24px;
+  width: var(--sidebar-w);
+  z-index: 10;
+}
+
+/* Carte / panneau */
+.ffc-side-card{
+  position: relative;
+  background: linear-gradient(160deg, var(--ffc-black) 0%, #1c1c1c 50%, var(--ffc-red) 100%);
+  color:#fff;
+  border-radius: 22px;
+  padding: 18px 16px;
+  outline: 1px solid rgba(255,255,255,.15);
+  box-shadow:
+    0 14px 36px rgba(0,0,0,.35),
+    inset 0 1px 0 rgba(255,255,255,.08);
+}
+
+/* reflet */
+.ffc-side-card::before{
+  content:"";
+  position:absolute; inset:0;
+  background: radial-gradient(120% 60% at -10% -20%, rgba(255,255,255,.18), transparent 50%),
+              radial-gradient(80% 50% at 120% 0%, rgba(255,255,255,.06), transparent 60%);
+  border-radius: inherit;
+  pointer-events:none;
+}
+
+.ffc-side-head{ display:flex; align-items:center; gap:14px; margin-bottom:10px; }
+.ffc-side-logo{ width:72px; height:auto; filter: drop-shadow(0 4px 8px rgba(0,0,0,.35)); }
+.ffc-side-title{ margin:0; font-size:22px; line-height:1.05; }
+.ffc-side-sub{ margin:4px 0 0; opacity:.95; font-size:15px; }
+
+.ffc-side-mapwrap{
+  overflow:hidden; border-radius:14px;
+  outline:1px solid rgba(255,255,255,.18);
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,.06);
+}
+.ffc-side-map{ width:100%; height:300px; border:0; }
+
+.ffc-side-meta{
+  display:flex; justify-content:space-between; align-items:center;
+  margin-top:10px; font-size:14px; opacity:.95;
+}
+.ffc-side-link{
+  color:#fff;
+  text-decoration:none;
+  padding:6px 12px;
+  border-radius:12px;
+  border:1px solid rgba(255,255,255,.28);
+  background: linear-gradient(180deg, rgba(255,255,255,.15), rgba(255,255,255,.05));
+}
+.ffc-side-link:hover{
+  background: rgba(255,255,255,.25);
+  color:#fff;
+}
+
+/* Décalage du contenu principal */
+.ffc-wrap{
+  margin-left: calc(var(--sidebar-w) + var(--sidebar-gap));
+}
+
+/* Responsive */
+@media (max-width: 1250px){
+  .ffc-sidebar{ position: static; width: min(980px, 96vw); margin: 0 auto 16px; }
+  .ffc-wrap{ margin-left: auto; }
+  .ffc-side-map{ height: 240px; }
+}
+/* ===== Sidebar Wolverhampton Wanderers (Wolves) ===== */
+:root{
+  --wwfc-gold:#FDB913;      /* Or Wolves */
+  --wwfc-dark:#231F20;      /* Noir Wolves */
+  --wwfc-gradient:#a07400;  /* Or foncé */
+  --sidebar-w: 420px;
+  --sidebar-gap: 28px;
+  --header-h: 100px;
+}
+
+/* Position */
+.wwfc-sidebar{
+  position: fixed;
+  top: calc(var(--header-h) + 16px);
+  left: 24px;
+  width: var(--sidebar-w);
+  z-index: 10;
+}
+
+/* Carte / panneau */
+.wwfc-side-card{
+  position: relative;
+  background: linear-gradient(160deg, var(--wwfc-gold) 0%, var(--wwfc-gradient) 45%, var(--wwfc-dark) 100%);
+  color:#fff;
+  border-radius: 22px;
+  padding: 18px 16px;
+  outline: 1px solid rgba(255,255,255,.12);
+  box-shadow:
+    0 14px 36px rgba(0,0,0,.35),
+    inset 0 1px 0 rgba(255,255,255,.10);
+}
+
+/* Reflet */
+.wwfc-side-card::before{
+  content:"";
+  position:absolute; inset:0;
+  background: radial-gradient(120% 60% at -10% -20%, rgba(255,255,255,.18), transparent 50%),
+              radial-gradient(80% 50% at 120% 0%, rgba(255,255,255,.06), transparent 60%);
+  border-radius: inherit;
+  pointer-events:none;
+}
+
+/* Layout */
+.wwfc-side-head{ display:flex; align-items:center; gap:14px; margin-bottom:10px; }
+.wwfc-side-logo{ width:72px; height:auto; filter: drop-shadow(0 4px 8px rgba(0,0,0,.35)); }
+.wwfc-side-title{ margin:0; font-size:22px; line-height:1.05; }
+.wwfc-side-sub{ margin:4px 0 0; opacity:.95; font-size:15px; }
+
+.wwfc-side-mapwrap{
+  overflow:hidden; border-radius:14px;
+  outline:1px solid rgba(255,255,255,.18);
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,.06);
+}
+.wwfc-side-map{ width:100%; height:300px; border:0; }
+
+.wwfc-side-meta{
+  display:flex; justify-content:space-between; align-items:center;
+  margin-top:10px; font-size:14px; opacity:.95;
+}
+.wwfc-side-link{
+  color:#fff;
+  text-decoration:none;
+  padding:6px 12px;
+  border-radius:12px;
+  border:1px solid rgba(255,255,255,.28);
+  background: linear-gradient(180deg, rgba(255,255,255,.18), rgba(255,255,255,.05));
+}
+.wwfc-side-link:hover{ background: rgba(255,255,255,.28); color:#fff; }
+
+/* Décalage du contenu principal */
+.wwfc-wrap{
+  margin-left: calc(var(--sidebar-w) + var(--sidebar-gap));
+}
+
+/* Responsive */
+@media (max-width: 1250px){
+  .wwfc-sidebar{ position: static; width: min(980px, 96vw); margin: 0 auto 16px; }
+  .wwfc-wrap{ margin-left: auto; }
+  .wwfc-side-map{ height: 240px; }
+}
+/* ===== Sidebar Brighton & Hove Albion ===== */
+:root{
+  --bha-blue:#0057B8;        /* Bleu Brighton officiel */
+  --bha-blue-dark:#003a7a;   /* Bleu foncé */
+  --bha-white:#ffffff;
+  --sidebar-w: 420px;
+  --sidebar-gap: 28px;
+  --header-h: 100px;
+}
+
+/* Position */
+.bha-sidebar{
+  position: fixed;
+  top: calc(var(--header-h) + 16px);
+  left: 24px;
+  width: var(--sidebar-w);
+  z-index: 10;
+}
+
+/* Carte / panneau */
+.bha-side-card{
+  position: relative;
+  background: linear-gradient(160deg, var(--bha-blue) 0%, var(--bha-blue-dark) 50%, #001e3f 100%);
+  color:#fff;
+  border-radius: 22px;
+  padding: 18px 16px;
+  outline: 1px solid rgba(255,255,255,.15);
+  box-shadow:
+    0 14px 36px rgba(0,0,0,.35),
+    inset 0 1px 0 rgba(255,255,255,.10);
+}
+
+/* reflet */
+.bha-side-card::before{
+  content:"";
+  position:absolute; inset:0;
+  background: radial-gradient(120% 60% at -10% -20%, rgba(255,255,255,.18), transparent 50%),
+              radial-gradient(80% 50% at 120% 0%, rgba(255,255,255,.06), transparent 60%);
+  border-radius: inherit;
+  pointer-events:none;
+}
+
+.bha-side-head{ display:flex; align-items:center; gap:14px; margin-bottom:10px; }
+.bha-side-logo{ width:72px; height:auto; filter: drop-shadow(0 4px 8px rgba(0,0,0,.35)); }
+.bha-side-title{ margin:0; font-size:22px; line-height:1.05; }
+.bha-side-sub{ margin:4px 0 0; opacity:.95; font-size:15px; }
+
+.bha-side-mapwrap{
+  overflow:hidden; border-radius:14px;
+  outline:1px solid rgba(255,255,255,.18);
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,.06);
+}
+.bha-side-map{ width:100%; height:300px; border:0; }
+
+.bha-side-meta{
+  display:flex; justify-content:space-between; align-items:center;
+  margin-top:10px; font-size:14px; opacity:.95;
+}
+.bha-side-link{
+  color:#fff;
+  text-decoration:none;
+  padding:6px 12px;
+  border-radius:12px;
+  border:1px solid rgba(255,255,255,.28);
+  background: linear-gradient(180deg, rgba(255,255,255,.18), rgba(255,255,255,.05));
+}
+.bha-side-link:hover{
+  background: rgba(255,255,255,.28);
+  color:#fff;
+}
+
+/* Décalage du contenu principal */
+.bha-wrap{
+  margin-left: calc(var(--sidebar-w) + var(--sidebar-gap));
+}
+
+/* Responsive */
+@media (max-width: 1250px){
+  .bha-sidebar{ position: static; width: min(980px, 96vw); margin: 0 auto 16px; }
+  .bha-wrap{ margin-left: auto; }
+  .bha-side-map{ height: 240px; }
+}
+/* ===== Sidebar Burnley FC ===== */
+:root{
+  --bur-claret:#6A0C33;        /* Claret Burnley */
+  --bur-blue:#94C1D2;          /* Bleu ciel Burnley */
+  --sidebar-w: 420px;
+  --sidebar-gap: 28px;
+  --header-h: 100px;
+}
+
+/* Position */
+.bur-sidebar{
+  position: fixed;
+  top: calc(var(--header-h) + 16px);
+  left: 24px;
+  width: var(--sidebar-w);
+  z-index: 10;
+}
+
+/* Carte / panneau */
+.bur-side-card{
+  position: relative;
+  background: linear-gradient(160deg, var(--bur-claret) 0%, #4b0825 50%, #2a0413 100%);
+  color:#fff;
+  border-radius: 22px;
+  padding: 18px 16px;
+  outline: 1px solid rgba(255,255,255,.12);
+  box-shadow:
+    0 14px 36px rgba(0,0,0,.35),
+    inset 0 1px 0 rgba(255,255,255,.10);
+}
+
+/* reflet */
+.bur-side-card::before{
+  content:"";
+  position:absolute; inset:0;
+  background: radial-gradient(120% 60% at -10% -20%, rgba(255,255,255,.18), transparent 50%),
+              radial-gradient(80% 50% at 120% 0%, rgba(255,255,255,.06), transparent 60%);
+  border-radius: inherit;
+  pointer-events:none;
+}
+
+.bur-side-head{ display:flex; align-items:center; gap:14px; margin-bottom:10px; }
+.bur-side-logo{ width:72px; height:auto; filter: drop-shadow(0 4px 8px rgba(0,0,0,.35)); }
+.bur-side-title{ margin:0; font-size:22px; line-height:1.05; }
+.bur-side-sub{ margin:4px 0 0; opacity:.95; font-size:15px; }
+
+.bur-side-mapwrap{
+  overflow:hidden; border-radius:14px;
+  outline:1px solid rgba(255,255,255,.18);
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,.06);
+}
+.bur-side-map{ width:100%; height:300px; border:0; }
+
+.bur-side-meta{
+  display:flex; justify-content:space-between; align-items:center;
+  margin-top:10px; font-size:14px; opacity:.95;
+}
+.bur-side-link{
+  color:#fff;
+  text-decoration:none;
+  padding:6px 12px;
+  border-radius:12px;
+  border:1px solid rgba(255,255,255,.28);
+  background: linear-gradient(180deg, rgba(255,255,255,.18), rgba(255,255,255,.05));
+}
+.bur-side-link:hover{
+  background: rgba(255,255,255,.28);
+  color:#fff;
+}
+
+/* Décalage du contenu principal */
+.bur-wrap{
+  margin-left: calc(var(--sidebar-w) + var(--sidebar-gap));
+}
+
+/* Responsive */
+@media (max-width: 1250px){
+  .bur-sidebar{ position: static; width: min(980px, 96vw); margin: 0 auto 16px; }
+  .bur-wrap{ margin-left: auto; }
+  .bur-side-map{ height: 240px; }
+}
+/* ===== Sidebar Sheffield United ===== */
+:root{
+  --shufc-red:#EE2737;         /* rouge Sheffield United */
+  --shufc-black:#141414;
+  --sidebar-w: 420px;
+  --sidebar-gap: 28px;
+  --header-h: 100px;
+}
+
+/* Position */
+.shufc-sidebar{
+  position: fixed;
+  top: calc(var(--header-h) + 16px);
+  left: 24px;
+  width: var(--sidebar-w);
+  z-index: 10;
+}
+
+/* Carte / panneau */
+.shufc-side-card{
+  position: relative;
+  background: linear-gradient(160deg, var(--shufc-red) 0%, #b41222 50%, var(--shufc-black) 100%);
+  color:#fff;
+  border-radius: 22px;
+  padding: 18px 16px;
+  outline: 1px solid rgba(255,255,255,.12);
+  box-shadow:
+    0 14px 36px rgba(0,0,0,.35),
+    inset 0 1px 0 rgba(255,255,255,.10);
+}
+
+/* reflet */
+.shufc-side-card::before{
+  content:"";
+  position:absolute; inset:0;
+  background: radial-gradient(120% 60% at -10% -20%, rgba(255,255,255,.18), transparent 50%),
+              radial-gradient(80% 50% at 120% 0%, rgba(255,255,255,.06), transparent 60%);
+  border-radius: inherit;
+  pointer-events:none;
+}
+
+.shufc-side-head{ display:flex; align-items:center; gap:14px; margin-bottom:10px; }
+.shufc-side-logo{ width:72px; height:auto; filter: drop-shadow(0 4px 8px rgba(0,0,0,.35)); }
+.shufc-side-title{ margin:0; font-size:22px; line-height:1.05; }
+.shufc-side-sub{ margin:4px 0 0; opacity:.95; font-size:15px; }
+
+.shufc-side-mapwrap{
+  overflow:hidden; border-radius:14px;
+  outline:1px solid rgba(255,255,255,.18);
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,.06);
+}
+.shufc-side-map{ width:100%; height:300px; border:0; }
+
+.shufc-side-meta{
+  display:flex; justify-content:space-between; align-items:center;
+  margin-top:10px; font-size:14px; opacity:.95;
+}
+.shufc-side-link{
+  color:#fff;
+  text-decoration:none;
+  padding:6px 12px;
+  border-radius:12px;
+  border:1px solid rgba(255,255,255,.28);
+  background: linear-gradient(180deg, rgba(255,255,255,.18), rgba(255,255,255,.05));
+}
+.shufc-side-link:hover{
+  background: rgba(255,255,255,.28);
+  color:#fff;
+}
+
+/* Décalage du contenu principal */
+.shufc-wrap{
+  margin-left: calc(var(--sidebar-w) + var(--sidebar-gap));
+}
+
+/* Responsive */
+@media (max-width: 1250px){
+  .shufc-sidebar{ position: static; width: min(980px, 96vw); margin: 0 auto 16px; }
+  .shufc-wrap{ margin-left: auto; }
+  .shufc-side-map{ height: 240px; }
+}
+/* ===== Sidebar Leeds United ===== */
+:root{
+  --leeds-blue:#1d3c92;      /* bleu royal Leeds */
+  --leeds-yellow:#f2c800;    /* or Leeds */
+  --sidebar-w: 420px;
+  --sidebar-gap: 28px;
+  --header-h: 100px;
+}
+
+.leeds-sidebar{
+  position: fixed;
+  top: calc(var(--header-h) + 16px);
+  left: 24px;
+  width: var(--sidebar-w);
+  z-index: 10;
+}
+
+/* Carte / panneau */
+.leeds-side-card{
+  position: relative;
+  background: linear-gradient(160deg, var(--leeds-blue) 0%, #0f2a6d 50%, #0a1638 100%);
+  color:#fff;
+  border-radius: 22px;
+  padding: 18px 16px;
+  outline: 1px solid rgba(255,255,255,.15);
+  box-shadow:
+    0 14px 36px rgba(0,0,0,.35),
+    inset 0 1px 0 rgba(255,255,255,.10);
+}
+
+.leeds-side-card::before{
+  content:"";
+  position:absolute; inset:0;
+  background: radial-gradient(120% 60% at -10% -20%, rgba(255,255,255,.18), transparent 50%),
+              radial-gradient(80% 50% at 120% 0%, rgba(255,255,255,.06), transparent 60%);
+  border-radius: inherit;
+  pointer-events:none;
+}
+
+.leeds-side-head{ display:flex; align-items:center; gap:14px; margin-bottom:10px; }
+.leeds-side-logo{ width:72px; height:auto; filter: drop-shadow(0 4px 8px rgba(0,0,0,.35)); }
+.leeds-side-title{ margin:0; font-size:22px; line-height:1.05; }
+.leeds-side-sub{ margin:4px 0 0; opacity:.95; font-size:15px; }
+
+.leeds-side-mapwrap{
+  overflow:hidden; border-radius:14px;
+  outline:1px solid rgba(255,255,255,.18);
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,.06);
+}
+.leeds-side-map{ width:100%; height:300px; border:0; }
+
+.leeds-side-meta{
+  display:flex; justify-content:space-between; align-items:center;
+  margin-top:10px; font-size:14px; opacity:.95;
+}
+.leeds-side-link{
+  color:#fff;
+  text-decoration:none;
+  padding:6px 12px;
+  border-radius:12px;
+  border:1px solid rgba(255,255,255,.28);
+  background: linear-gradient(180deg, rgba(255,255,255,.18), rgba(255,255,255,.05));
+}
+.leeds-side-link:hover{
+  background: rgba(255,255,255,.30);
+  color: var(--leeds-yellow);
+}
+
+/* Décalage du contenu principal */
+.leeds-wrap{
+  margin-left: calc(var(--sidebar-w) + var(--sidebar-gap));
+}
+
+/* Responsive */
+@media (max-width: 1250px){
+  .leeds-sidebar{ position: static; width: min(980px, 96vw); margin: 0 auto 16px; }
+  .leeds-wrap{ margin-left: auto; }
+  .leeds-side-map{ height: 240px; }
+}
+/* ===== Sidebar Southampton FC ===== */
+:root{
+  --sfc-red:#d71920;         /* rouge Southampton */
+  --sfc-black:#141414;
+  --sidebar-w: 420px;
+  --sidebar-gap: 28px;
+  --header-h: 100px;
+}
+
+.sfc-sidebar{
+  position: fixed;
+  top: calc(var(--header-h) + 16px);
+  left: 24px;
+  width: var(--sidebar-w);
+  z-index: 10;
+}
+
+/* Carte / panneau */
+.sfc-side-card{
+  position: relative;
+  background: linear-gradient(160deg, var(--sfc-red) 0%, #a90f19 45%, var(--sfc-black) 100%);
+  color:#fff;
+  border-radius: 22px;
+  padding: 18px 16px;
+  outline: 1px solid rgba(255,255,255,.12);
+  box-shadow:
+    0 14px 36px rgba(0,0,0,.35),
+    inset 0 1px 0 rgba(255,255,255,.10);
+}
+
+.sfc-side-card::before{
+  content:"";
+  position:absolute; inset:0;
+  background: radial-gradient(120% 60% at -10% -20%, rgba(255,255,255,.18), transparent 50%),
+              radial-gradient(80% 50% at 120% 0%, rgba(255,255,255,.06), transparent 60%);
+  border-radius: inherit;
+  pointer-events:none;
+}
+
+.sfc-side-head{ display:flex; align-items:center; gap:14px; margin-bottom:10px; }
+.sfc-side-logo{ width:72px; height:auto; filter: drop-shadow(0 4px 8px rgba(0,0,0,.35)); }
+.sfc-side-title{ margin:0; font-size:22px; line-height:1.05; }
+.sfc-side-sub{ margin:4px 0 0; opacity:.95; font-size:15px; }
+
+.sfc-side-mapwrap{
+  overflow:hidden; border-radius:14px;
+  outline:1px solid rgba(255,255,255,.18);
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,.06);
+}
+.sfc-side-map{ width:100%; height:300px; border:0; }
+
+.sfc-side-meta{
+  display:flex; justify-content:space-between; align-items:center;
+  margin-top:10px; font-size:14px; opacity:.95;
+}
+.sfc-side-link{
+  color:#fff;
+  text-decoration:none;
+  padding:6px 12px;
+  border-radius:12px;
+  border:1px solid rgba(255,255,255,.28);
+  background: linear-gradient(180deg, rgba(255,255,255,.18), rgba(255,255,255,.05));
+}
+.sfc-side-link:hover{
+  background: rgba(255,255,255,.30);
+  color:#fff;
+}
+
+/* Décalage du contenu principal */
+.sfc-wrap{
+  margin-left: calc(var(--sidebar-w) + var(--sidebar-gap));
+}
+
+/* Responsive */
+@media (max-width: 1250px){
+  .sfc-sidebar{ position: static; width: min(980px, 96vw); margin: 0 auto 16px; }
+  .sfc-wrap{ margin-left: auto; }
+  .sfc-side-map{ height: 240px; }
+}
+/* ===== Sidebar Portsmouth FC ===== */
+:root{
+  --pompey-blue:#003da5;        /* bleu Portsmouth */
+  --pompey-gold:#f2c300;        /* jaune or */
+  --sidebar-w: 420px;
+  --sidebar-gap: 28px;
+  --header-h: 100px;
+}
+
+.pompey-sidebar{
+  position: fixed;
+  top: calc(var(--header-h) + 16px);
+  left: 24px;
+  width: var(--sidebar-w);
+  z-index: 10;
+}
+
+/* Carte / panneau */
+.pompey-side-card{
+  position: relative;
+  background: linear-gradient(160deg, var(--pompey-blue) 0%, #002d7a 45%, #001532 100%);
+  color:#fff;
+  border-radius: 22px;
+  padding: 18px 16px;
+  outline: 1px solid rgba(255,255,255,.12);
+  box-shadow:
+    0 14px 36px rgba(0,0,0,.35),
+    inset 0 1px 0 rgba(255,255,255,.10);
+}
+
+.pompey-side-card::before{
+  content:"";
+  position:absolute; inset:0;
+  background: radial-gradient(120% 60% at -10% -20%, rgba(255,255,255,.18), transparent 50%),
+              radial-gradient(80% 50% at 120% 0%, rgba(255,255,255,.06), transparent 60%);
+  border-radius: inherit;
+  pointer-events:none;
+}
+
+.pompey-side-head{ display:flex; align-items:center; gap:14px; margin-bottom:10px; }
+.pompey-side-logo{ width:72px; height:auto; filter: drop-shadow(0 4px 8px rgba(0,0,0,.35)); }
+.pompey-side-title{ margin:0; font-size:22px; line-height:1.05; }
+.pompey-side-sub{ margin:4px 0 0; opacity:.95; font-size:15px; }
+
+.pompey-side-mapwrap{
+  overflow:hidden; border-radius:14px;
+  outline:1px solid rgba(255,255,255,.18);
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,.06);
+}
+.pompey-side-map{ width:100%; height:300px; border:0; }
+
+.pompey-side-meta{
+  display:flex; justify-content:space-between; align-items:center;
+  margin-top:10px; font-size:14px; opacity:.95;
+}
+.pompey-side-link{
+  color:#fff;
+  text-decoration:none;
+  padding:6px 12px;
+  border-radius:12px;
+  border:1px solid rgba(255,255,255,.28);
+  background: linear-gradient(180deg, rgba(255,255,255,.18), rgba(255,255,255,.05));
+}
+.pompey-side-link:hover{
+  background: rgba(255,255,255,.30);
+  color: var(--pompey-gold);
+}
+
+/* Décalage du contenu principal */
+.pompey-wrap{
+  margin-left: calc(var(--sidebar-w) + var(--sidebar-gap));
+}
+
+/* Responsive */
+@media (max-width: 1250px){
+  .pompey-sidebar{ position: static; width: min(980px, 96vw); margin: 0 auto 16px; }
+  .pompey-wrap{ margin-left: auto; }
+  .pompey-side-map{ height: 240px; }
+}
+/* ===== Sidebar Sunderland AFC ===== */
+:root{
+  --safc-red:#d81921;       /* rouge Sunderland */
+  --safc-black:#111;        /* noir soutenu */
+  --sidebar-w: 420px;
+  --sidebar-gap: 28px;
+  --header-h: 100px;
+}
+
+.safc-sidebar{
+  position: fixed;
+  top: calc(var(--header-h) + 16px);
+  left: 24px;
+  width: var(--sidebar-w);
+  z-index: 10;
+}
+
+.safc-side-card{
+  position: relative;
+  background: linear-gradient(160deg, var(--safc-red) 0%, #a5121a 45%, var(--safc-black) 100%);
+  color:#fff;
+  border-radius: 22px;
+  padding: 18px 16px;
+  outline: 1px solid rgba(255,255,255,.12);
+  box-shadow:
+    0 14px 36px rgba(0,0,0,.35),
+    inset 0 1px 0 rgba(255,255,255,.10);
+}
+
+.safc-side-card::before{
+  content:"";
+  position:absolute; inset:0;
+  background: radial-gradient(120% 60% at -10% -20%, rgba(255,255,255,.18), transparent 50%),
+              radial-gradient(80% 50% at 120% 0%, rgba(255,255,255,.06), transparent 60%);
+  border-radius: inherit;
+  pointer-events:none;
+}
+
+.safc-side-head{ display:flex; align-items:center; gap:14px; margin-bottom:10px; }
+.safc-side-logo{ width:72px; height:auto; filter: drop-shadow(0 4px 8px rgba(0,0,0,.35)); }
+.safc-side-title{ margin:0; font-size:22px; line-height:1.05; }
+.safc-side-sub{ margin:4px 0 0; opacity:.95; font-size:15px; }
+
+.safc-side-mapwrap{
+  overflow:hidden; border-radius:14px;
+  outline:1px solid rgba(255,255,255,.18);
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,.06);
+}
+.safc-side-map{ width:100%; height:300px; border:0; }
+
+.safc-side-meta{
+  display:flex; justify-content:space-between; align-items:center;
+  margin-top:10px; font-size:14px; opacity:.95;
+}
+.safc-side-link{
+  color:#fff;
+  text-decoration:none;
+  padding:6px 12px;
+  border-radius:12px;
+  border:1px solid rgba(255,255,255,.28);
+  background: linear-gradient(180deg, rgba(255,255,255,.18), rgba(255,255,255,.05));
+}
+.safc-side-link:hover{
+  background: rgba(255,255,255,.30);
+  color:#fff;
+}
+
+/* Décalage du contenu principal */
+.safc-wrap{
+  margin-left: calc(var(--sidebar-w) + var(--sidebar-gap));
+}
+
+@media (max-width: 1250px){
+  .safc-sidebar{ position: static; width: min(980px, 96vw); margin: 0 auto 16px; }
+  .safc-wrap{ margin-left: auto; }
+  .safc-side-map{ height: 240px; }
+}
+/* ===== Sidebar Stoke City FC ===== */
+:root{
+  --scfc-red:#d20000;      /* rouge Stoke City */
+  --scfc-deep:#7a0000;     /* version foncée */
+  --sidebar-w: 420px;
+  --sidebar-gap: 28px;
+  --header-h: 100px;
+}
+
+.scfc-sidebar{
+  position: fixed;
+  top: calc(var(--header-h) + 16px);
+  left: 24px;
+  width: var(--sidebar-w);
+  z-index: 10;
+}
+
+.scfc-side-card{
+  position: relative;
+  background: linear-gradient(160deg, var(--scfc-red) 0%, #b00000 45%, var(--scfc-deep) 100%);
+  color:#fff;
+  border-radius: 22px;
+  padding: 18px 16px;
+  outline: 1px solid rgba(255,255,255,.12);
+  box-shadow:
+    0 14px 36px rgba(0,0,0,.35),
+    inset 0 1px 0 rgba(255,255,255,.10);
+}
+
+.scfc-side-card::before{
+  content:"";
+  position:absolute; inset:0;
+  background: radial-gradient(120% 60% at -10% -20%, rgba(255,255,255,.18), transparent 50%),
+              radial-gradient(80% 50% at 120% 0%, rgba(255,255,255,.06), transparent 60%);
+  border-radius: inherit;
+  pointer-events:none;
+}
+
+.scfc-side-head{ display:flex; align-items:center; gap:14px; margin-bottom:10px; }
+.scfc-side-logo{ width:72px; height:auto; filter: drop-shadow(0 4px 8px rgba(0,0,0,.35)); }
+.scfc-side-title{ margin:0; font-size:22px; line-height:1.05; }
+.scfc-side-sub{ margin:4px 0 0; opacity:.95; font-size:15px; }
+
+.scfc-side-mapwrap{
+  overflow:hidden; border-radius:14px;
+  outline:1px solid rgba(255,255,255,.18);
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,.06);
+}
+.scfc-side-map{ width:100%; height:300px; border:0; }
+
+.scfc-side-meta{
+  display:flex; justify-content:space-between; align-items:center;
+  margin-top:10px; font-size:14px; opacity:.95;
+}
+.scfc-side-link{
+  color:#fff;
+  text-decoration:none;
+  padding:6px 12px;
+  border-radius:12px;
+  border:1px solid rgba(255,255,255,.28);
+  background: linear-gradient(180deg, rgba(255,255,255,.18), rgba(255,255,255,.05));
+}
+.scfc-side-link:hover{
+  background: rgba(255,255,255,.30);
+  color:#fff;
+}
+
+/* Décale le contenu principal */
+.scfc-wrap{
+  margin-left: calc(var(--sidebar-w) + var(--sidebar-gap));
+}
+
+@media (max-width: 1250px){
+  .scfc-sidebar{ position: static; width: min(980px, 96vw); margin: 0 auto 16px; }
+  .scfc-wrap{ margin-left: auto; }
+  .scfc-side-map{ height: 240px; }
+}
+/* ===== Sidebar Swansea City AFC ===== */
+:root{
+  --scafc-white:#ffffff;
+  --scafc-black:#0c0c0c;
+  --scafc-grey:#222;
+  --sidebar-w: 420px;
+  --sidebar-gap: 28px;
+  --header-h: 100px;
+}
+
+.scafc-sidebar{
+  position: fixed;
+  top: calc(var(--header-h) + 16px);
+  left: 24px;
+  width: var(--sidebar-w);
+  z-index: 10;
+}
+
+.scafc-side-card{
+  position: relative;
+  background: linear-gradient(160deg, var(--scafc-black) 0%, #1a1a1a 50%, #3a3a3a 100%);
+  color:#fff;
+  border-radius: 22px;
+  padding: 18px 16px;
+  outline: 1px solid rgba(255,255,255,.12);
+  box-shadow:
+    0 14px 36px rgba(0,0,0,.40),
+    inset 0 1px 0 rgba(255,255,255,.08);
+}
+
+.scafc-side-card::before{
+  content:"";
+  position:absolute; inset:0;
+  background: radial-gradient(120% 60% at -10% -20%, rgba(255,255,255,.14), transparent 55%),
+              radial-gradient(90% 50% at 120% 0%, rgba(255,255,255,.05), transparent 60%);
+  border-radius: inherit;
+  pointer-events:none;
+}
+
+.scafc-side-head{ display:flex; align-items:center; gap:14px; margin-bottom:10px; }
+.scafc-side-logo{ width:72px; height:auto; filter: drop-shadow(0 4px 8px rgba(0,0,0,.5)); }
+.scafc-side-title{ margin:0; font-size:22px; line-height:1.05; }
+.scafc-side-sub{ margin:4px 0 0; opacity:.95; font-size:15px; }
+
+.scafc-side-mapwrap{
+  overflow:hidden; border-radius:14px;
+  outline:1px solid rgba(255,255,255,.18);
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,.05);
+}
+.scafc-side-map{ width:100%; height:300px; border:0; }
+
+.scafc-side-meta{
+  display:flex; justify-content:space-between; align-items:center;
+  margin-top:10px; font-size:14px; opacity:.95;
+}
+.scafc-side-link{
+  color:#fff;
+  text-decoration:none;
+  padding:6px 12px;
+  border-radius:12px;
+  border:1px solid rgba(255,255,255,.28);
+  background: linear-gradient(180deg, rgba(255,255,255,.14), rgba(255,255,255,.04));
+}
+.scafc-side-link:hover{
+  background: rgba(255,255,255,.28);
+  color:#fff;
+}
+
+/* Décalage du contenu principal */
+.scafc-wrap{
+  margin-left: calc(var(--sidebar-w) + var(--sidebar-gap));
+}
+
+@media (max-width: 1250px){
+  .scafc-sidebar{ position: static; width: min(980px, 96vw); margin: 0 auto 16px; }
+  .scafc-wrap{ margin-left: auto; }
+  .scafc-side-map{ height: 240px; }
+}
+/* ===== Sidebar Wigan Athletic ===== */
+:root{
+  --wafc-blue:#0057B8;     /* bleu Wigan */
+  --wafc-blue-dark:#003a7a;
+  --sidebar-w: 420px;
+  --sidebar-gap: 28px;
+  --header-h: 100px;
+}
+
+.wafc-sidebar{
+  position: fixed;
+  top: calc(var(--header-h) + 16px);
+  left: 24px;
+  width: var(--sidebar-w);
+  z-index: 10;
+}
+
+.wafc-side-card{
+  position: relative;
+  background: linear-gradient(160deg, var(--wafc-blue) 0%, var(--wafc-blue-dark) 50%, #001e3f 100%);
+  color:#fff;
+  border-radius: 22px;
+  padding: 18px 16px;
+  outline: 1px solid rgba(255,255,255,.12);
+  box-shadow:
+    0 14px 36px rgba(0,0,0,.35),
+    inset 0 1px 0 rgba(255,255,255,.10);
+}
+
+/* reflet léger */
+.wafc-side-card::before{
+  content:"";
+  position:absolute; inset:0;
+  background: radial-gradient(120% 60% at -10% -20%, rgba(255,255,255,.18), transparent 50%),
+              radial-gradient(80% 50% at 120% 0%, rgba(255,255,255,.06), transparent 60%);
+  border-radius: inherit;
+  pointer-events:none;
+}
+
+.wafc-side-head{ display:flex; align-items:center; gap:14px; margin-bottom:10px; }
+.wafc-side-logo{ width:72px; height:auto; filter: drop-shadow(0 4px 8px rgba(0,0,0,.35)); }
+.wafc-side-title{ margin:0; font-size:22px; line-height:1.05; }
+.wafc-side-sub{ margin:4px 0 0; opacity:.95; font-size:15px; }
+
+.wafc-side-mapwrap{
+  overflow:hidden; border-radius:14px;
+  outline:1px solid rgba(255,255,255,.18);
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,.06);
+}
+.wafc-side-map{ width:100%; height:300px; border:0; }
+
+.wafc-side-meta{
+  display:flex; justify-content:space-between; align-items:center;
+  margin-top:10px; font-size:14px; opacity:.95;
+}
+.wafc-side-link{
+  color:#fff;
+  text-decoration:none;
+  padding:6px 12px;
+  border-radius:12px;
+  border:1px solid rgba(255,255,255,.28);
+  background: linear-gradient(180deg, rgba(255,255,255,.18), rgba(255,255,255,.05));
+}
+.wafc-side-link:hover{
+  background: rgba(255,255,255,.30);
+  color:#fff;
+}
+
+/* Décalage du contenu principal si besoin */
+.wafc-wrap{
+  margin-left: calc(var(--sidebar-w) + var(--sidebar-gap));
+}
+
+/* Responsive */
+@media (max-width: 1250px){
+  .wafc-sidebar{ position: static; width: min(980px, 96vw); margin: 0 auto 16px; }
+  .wafc-wrap{ margin-left: auto; }
+  .wafc-side-map{ height: 240px; }
+}
+/* ===== Sidebar Blackpool FC ===== */
+:root{
+  --bfc-orange:#f57c00;
+  --bfc-orange-dark:#b55700;
+  --sidebar-w: 420px;
+  --sidebar-gap: 28px;
+  --header-h: 100px;
+}
+
+.bfc-sidebar{
+  position: fixed;
+  top: calc(var(--header-h) + 16px);
+  left: 24px;
+  width: var(--sidebar-w);
+  z-index: 10;
+}
+
+.bfc-side-card{
+  position: relative;
+  background: linear-gradient(160deg, var(--bfc-orange) 0%, var(--bfc-orange-dark) 45%, #5a2c00 100%);
+  color:#fff;
+  border-radius: 22px;
+  padding: 18px 16px;
+  outline: 1px solid rgba(255,255,255,.12);
+  box-shadow:
+    0 14px 36px rgba(0,0,0,.35),
+    inset 0 1px 0 rgba(255,255,255,.10);
+}
+
+.bfc-side-card::before{
+  content:"";
+  position:absolute; inset:0;
+  background: radial-gradient(120% 60% at -10% -20%, rgba(255,255,255,.20), transparent 55%),
+              radial-gradient(80% 50% at 120% 0%, rgba(255,255,255,.08), transparent 60%);
+  border-radius: inherit;
+  pointer-events:none;
+}
+
+.bfc-side-head{ display:flex; align-items:center; gap:14px; margin-bottom:10px; }
+.bfc-side-logo{ width:72px; height:auto; filter: drop-shadow(0 4px 8px rgba(0,0,0,.35)); }
+.bfc-side-title{ margin:0; font-size:22px; line-height:1.05; }
+.bfc-side-sub{ margin:4px 0 0; opacity:.95; font-size:15px; }
+
+.bfc-side-mapwrap{
+  overflow:hidden; border-radius:14px;
+  outline:1px solid rgba(255,255,255,.18);
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,.06);
+}
+.bfc-side-map{ width:100%; height:300px; border:0; }
+
+.bfc-side-meta{
+  display:flex; justify-content:space-between; align-items:center;
+  margin-top:10px; font-size:14px; opacity:.95;
+}
+.bfc-side-link{
+  color:#fff;
+  text-decoration:none;
+  padding:6px 12px;
+  border-radius:12px;
+  border:1px solid rgba(255,255,255,.28);
+  background: linear-gradient(180deg, rgba(255,255,255,.18), rgba(255,255,255,.05));
+}
+.bfc-side-link:hover{
+  background: rgba(255,255,255,.30);
+  color:#fff;
+}
+
+.bfc-wrap{
+  margin-left: calc(var(--sidebar-w) + var(--sidebar-gap));
+}
+
+@media (max-width: 1250px){
+  .bfc-sidebar{ position: static; width: min(980px, 96vw); margin: 0 auto 16px; }
+  .bfc-wrap{ margin-left: auto; }
+  .bfc-side-map{ height: 240px; }
+}
+/* ===== Sidebar Hull City AFC ===== */
+:root{
+  --hcafc-amber:#f6a800;
+  --hcafc-amber-dark:#b37500;
+  --sidebar-w: 420px;
+  --sidebar-gap: 28px;
+  --header-h: 100px;
+}
+
+.hcafc-sidebar{
+  position: fixed;
+  top: calc(var(--header-h) + 16px);
+  left: 24px;
+  width: var(--sidebar-w);
+  z-index: 10;
+}
+
+.hcafc-side-card{
+  position: relative;
+  background: linear-gradient(160deg, var(--hcafc-amber) 0%, var(--hcafc-amber-dark) 45%, #3b2500 100%);
+  color:#fff;
+  border-radius: 22px;
+  padding: 18px 16px;
+  outline: 1px solid rgba(255,255,255,.12);
+  box-shadow:
+    0 14px 36px rgba(0,0,0,.35),
+    inset 0 1px 0 rgba(255,255,255,.10);
+}
+
+/* reflet interne */
+.hcafc-side-card::before{
+  content:"";
+  position:absolute; inset:0;
+  background: radial-gradient(120% 60% at -10% -20%, rgba(255,255,255,.18), transparent 55%),
+              radial-gradient(80% 50% at 120% 0%, rgba(255,255,255,.06), transparent 60%);
+  border-radius: inherit;
+  pointer-events:none;
+}
+
+.hcafc-side-head{ display:flex; align-items:center; gap:14px; margin-bottom:10px; }
+.hcafc-side-logo{ width:72px; height:auto; filter: drop-shadow(0 4px 8px rgba(0,0,0,.35)); }
+.hcafc-side-title{ margin:0; font-size:22px; line-height:1.05; }
+.hcafc-side-sub{ margin:4px 0 0; opacity:.95; font-size:15px; }
+
+.hcafc-side-mapwrap{
+  overflow:hidden; border-radius:14px;
+  outline:1px solid rgba(255,255,255,.18);
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,.06);
+}
+.hcafc-side-map{ width:100%; height:300px; border:0; }
+
+.hcafc-side-meta{
+  display:flex; justify-content:space-between; align-items:center;
+  margin-top:10px; font-size:14px; opacity:.95;
+}
+.hcafc-side-link{
+  color:#fff;
+  text-decoration:none;
+  padding:6px 12px;
+  border-radius:12px;
+  border:1px solid rgba(255,255,255,.28);
+  background: linear-gradient(180deg, rgba(255,255,255,.18), rgba(255,255,255,.05));
+}
+.hcafc-side-link:hover{
+  background: rgba(255,255,255,.30);
+  color:#fff;
+}
+
+.hcafc-wrap{
+  margin-left: calc(var(--sidebar-w) + var(--sidebar-gap));
+}
+
+@media (max-width: 1250px){
+  .hcafc-sidebar{ position: static; width: min(980px, 96vw); margin: 0 auto 16px; }
+  .hcafc-wrap{ margin-left: auto; }
+  .hcafc-side-map{ height: 240px; }
+}
+:root{
+  --rfc-blue:#0033a0;      /* bleu Reading */
+  --rfc-blue-dark:#022568; /* bleu foncé */
+  --header-h:100px; --sidebar-w:420px; --sidebar-gap:28px;
+}
+.rfc-sidebar{
+  position: fixed; top: calc(var(--header-h) + 16px); left: 24px;
+  width: var(--sidebar-w); z-index: 10;
+}
+.rfc-side-card{
+  position:relative;
+  background: linear-gradient(160deg, var(--rfc-blue) 0%, #0a3fae 45%, var(--rfc-blue-dark) 100%);
+  color:#fff; border-radius:22px; padding:18px 16px;
+  outline:1px solid rgba(255,255,255,.12);
+  box-shadow:0 14px 36px rgba(0,0,0,.35), inset 0 1px 0 rgba(255,255,255,.10);
+}
+.rfc-side-card::before{
+  content:""; position:absolute; inset:0; border-radius:inherit; pointer-events:none;
+  background:
+    radial-gradient(120% 60% at -10% -20%, rgba(255,255,255,.18), transparent 55%),
+    radial-gradient(80% 50% at 120% 0%, rgba(255,255,255,.06), transparent 60%);
+}
+.rfc-side-head{ display:flex; align-items:center; gap:14px; margin-bottom:10px; }
+.rfc-side-logo{ width:72px; height:auto; filter: drop-shadow(0 4px 8px rgba(0,0,0,.35)); }
+.rfc-side-title{ margin:0; font-size:22px; line-height:1.05; }
+.rfc-side-sub{ margin:4px 0 0; opacity:.95; font-size:15px; }
+.rfc-side-mapwrap{
+  overflow:hidden; border-radius:14px;
+  outline:1px solid rgba(255,255,255,.18);
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,.06);
+}
+.rfc-side-map{ width:100%; height:300px; border:0; }
+.rfc-side-meta{
+  display:flex; justify-content:space-between; align-items:center;
+  margin-top:10px; font-size:14px; opacity:.95;
+}
+.rfc-side-link{
+  color:#fff; text-decoration:none; padding:6px 12px; border-radius:12px;
+  border:1px solid rgba(255,255,255,.28);
+  background: linear-gradient(180deg, rgba(255,255,255,.18), rgba(255,255,255,.05));
+}
+.rfc-side-link:hover{ background: rgba(255,255,255,.30); color:#fff; }
+
+/* décaler le contenu si tu veux garder la sidebar fixe */
+.rfc-wrap{ margin-left: calc(var(--sidebar-w) + var(--sidebar-gap)); }
+
+@media (max-width:1250px){
+  .rfc-sidebar{ position: static; width:min(980px,96vw); margin:0 auto 16px; }
+  .rfc-wrap{ margin-left:auto; }
+  .rfc-side-map{ height:240px; }
+}
+/* ===== Sidebar Bolton Wanderers ===== */
+:root{
+  --bwfc-navy:#1b2b5b;      /* bleu marine Bolton */
+  --bwfc-navy-dark:#101c3a; /* bleu plus sombre */
+  --bwfc-red:#c8102e;       /* accent rouge */
+  --header-h:100px;
+  --sidebar-w:420px;
+  --sidebar-gap:28px;
+}
+
+.bwfc-sidebar{
+  position: fixed;
+  top: calc(var(--header-h) + 16px);
+  left: 24px;
+  width: var(--sidebar-w);
+  z-index: 10;
+}
+
+.bwfc-side-card{
+  position: relative;
+  background: linear-gradient(160deg, var(--bwfc-navy) 0%, #233a73 45%, var(--bwfc-navy-dark) 100%);
+  color:#fff;
+  border-radius: 22px;
+  padding: 18px 16px;
+  outline: 1px solid rgba(255,255,255,.12);
+  box-shadow: 0 14px 36px rgba(0,0,0,.35), inset 0 1px 0 rgba(255,255,255,.10);
+}
+
+.bwfc-side-card::before{
+  content:"";
+  position:absolute; inset:0;
+  background:
+    radial-gradient(120% 60% at -10% -20%, rgba(255,255,255,.18), transparent 55%),
+    radial-gradient(80% 50% at 120% 0%, rgba(255,255,255,.06), transparent 60%);
+  border-radius: inherit;
+  pointer-events:none;
+}
+
+.bwfc-side-head{ display:flex; align-items:center; gap:14px; margin-bottom:10px; }
+.bwfc-side-logo{ width:72px; height:auto; filter: drop-shadow(0 4px 8px rgba(0,0,0,.35)); }
+.bwfc-side-title{ margin:0; font-size:22px; line-height:1.05; }
+.bwfc-side-sub{ margin:4px 0 0; opacity:.95; font-size:15px; }
+
+.bwfc-side-mapwrap{
+  overflow:hidden; border-radius:14px;
+  outline:1px solid rgba(255,255,255,.18);
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,.06);
+}
+.bwfc-side-map{ width:100%; height:300px; border:0; }
+
+.bwfc-side-meta{
+  display:flex; justify-content:space-between; align-items:center;
+  margin-top:10px; font-size:14px; opacity:.95;
+}
+.bwfc-side-link{
+  color:#fff; text-decoration:none;
+  padding:6px 12px; border-radius:12px;
+  border:1px solid rgba(255,255,255,.28);
+  background: linear-gradient(180deg, rgba(255,255,255,.18), rgba(255,255,255,.05));
+}
+.bwfc-side-link:hover{ background: rgba(255,255,255,.3); color:#fff; }
+
+/* Si tu veux laisser l’espace pour la sidebar fixe */
+.bwfc-wrap{ margin-left: calc(var(--sidebar-w) + var(--sidebar-gap)); }
+
+@media (max-width:1250px){
+  .bwfc-sidebar{ position: static; width:min(980px,96vw); margin:0 auto 16px; }
+  .bwfc-wrap{ margin-left:auto; }
+  .bwfc-side-map{ height:240px; }
+}
+
+/* Optionnel : petit liseré rouge sous le titre pour rappeler l’identité */
+.bwfc-side-title{
+  display:inline-block;
+  padding-bottom:2px;
+  border-bottom: 2px solid var(--bwfc-red);
+}
+/* ===== Sidebar Birmingham City FC ===== */
+:root{
+  --bcfc-blue:#0033a0;       /* bleu Birmingham */
+  --bcfc-blue-dark:#001f60;  /* bleu foncé */
+  --bcfc-white:#ffffff;
+  --sidebar-w:420px;
+  --sidebar-gap:28px;
+  --header-h:100px;
+}
+
+.bcfc-sidebar{
+  position:fixed;
+  top:calc(var(--header-h) + 16px);
+  left:24px;
+  width:var(--sidebar-w);
+  z-index:10;
+}
+
+.bcfc-side-card{
+  position:relative;
+  background:linear-gradient(160deg, var(--bcfc-blue) 0%, #0a2f86 45%, var(--bcfc-blue-dark) 100%);
+  color:#fff;
+  border-radius:22px;
+  padding:18px 16px;
+  outline:1px solid rgba(255,255,255,.12);
+  box-shadow:0 14px 36px rgba(0,0,0,.35), inset 0 1px 0 rgba(255,255,255,.10);
+}
+
+.bcfc-side-card::before{
+  content:"";
+  position:absolute; inset:0;
+  background:
+    radial-gradient(120% 60% at -10% -20%, rgba(255,255,255,.18), transparent 55%),
+    radial-gradient(80% 50% at 120% 0%, rgba(255,255,255,.06), transparent 60%);
+  border-radius:inherit;
+  pointer-events:none;
+}
+
+.bcfc-side-head{ display:flex; align-items:center; gap:14px; margin-bottom:10px; }
+.bcfc-side-logo{ width:72px; height:auto; filter: drop-shadow(0 4px 8px rgba(0,0,0,.35)); }
+.bcfc-side-title{ margin:0; font-size:22px; line-height:1.05; }
+.bcfc-side-sub{ margin:4px 0 0; opacity:.95; font-size:15px; }
+
+.bcfc-side-mapwrap{
+  overflow:hidden; border-radius:14px;
+  outline:1px solid rgba(255,255,255,.18);
+  box-shadow:inset 0 0 0 1px rgba(255,255,255,.06);
+}
+.bcfc-side-map{ width:100%; height:300px; border:0; }
+
+.bcfc-side-meta{
+  display:flex; justify-content:space-between; align-items:center;
+  margin-top:10px; font-size:14px; opacity:.95;
+}
+.bcfc-side-link{
+  color:#fff; text-decoration:none;
+  padding:6px 12px; border-radius:12px;
+  border:1px solid rgba(255,255,255,.28);
+  background:linear-gradient(180deg, rgba(255,255,255,.18), rgba(255,255,255,.05));
+}
+.bcfc-side-link:hover{ background:rgba(255,255,255,.30); color:#fff; }
+
+.bcfc-wrap{ margin-left:calc(var(--sidebar-w) + var(--sidebar-gap)); }
+
+@media (max-width:1250px){
+  .bcfc-sidebar{ position:static; width:min(980px,96vw); margin:0 auto 16px; }
+  .bcfc-wrap{ margin-left:auto; }
+  .bcfc-side-map{ height:240px; }
+}
+/* ===== Sidebar Cardiff City FC ===== */
+:root{
+  --ccfc-blue:#0070b8;        /* bleu Cardiff */
+  --ccfc-blue-dark:#00395f;   /* bleu foncé */
+  --sidebar-w:420px;
+  --sidebar-gap:28px;
+  --header-h:100px;
+}
+
+.ccfc-sidebar{
+  position:fixed;
+  top:calc(var(--header-h) + 16px);
+  left:24px;
+  width:var(--sidebar-w);
+  z-index:10;
+}
+
+.ccfc-side-card{
+  position:relative;
+  background:linear-gradient(160deg, var(--ccfc-blue) 0%, #005f9b 45%, var(--ccfc-blue-dark) 100%);
+  color:#fff;
+  border-radius:22px;
+  padding:18px 16px;
+  outline:1px solid rgba(255,255,255,.12);
+  box-shadow:0 14px 36px rgba(0,0,0,.35), inset 0 1px 0 rgba(255,255,255,.10);
+}
+
+.ccfc-side-card::before{
+  content:"";
+  position:absolute; inset:0;
+  background:
+    radial-gradient(120% 60% at -10% -20%, rgba(255,255,255,.18), transparent 55%),
+    radial-gradient(80% 50% at 120% 0%, rgba(255,255,255,.06), transparent 60%);
+  border-radius:inherit;
+  pointer-events:none;
+}
+
+.ccfc-side-head{ display:flex; align-items:center; gap:14px; margin-bottom:10px; }
+.ccfc-side-logo{ width:72px; height:auto; filter: drop-shadow(0 4px 8px rgba(0,0,0,.35)); }
+.ccfc-side-title{ margin:0; font-size:22px; line-height:1.05; }
+.ccfc-side-sub{ margin:4px 0 0; opacity:.95; font-size:15px; }
+
+.ccfc-side-mapwrap{
+  overflow:hidden; border-radius:14px;
+  outline:1px solid rgba(255,255,255,.18);
+  box-shadow:inset 0 0 0 1px rgba(255,255,255,.06);
+}
+.ccfc-side-map{ width:100%; height:300px; border:0; }
+
+.ccfc-side-meta{
+  display:flex; justify-content:space-between; align-items:center;
+  margin-top:10px; font-size:14px; opacity:.95;
+}
+.ccfc-side-link{
+  color:#fff; text-decoration:none;
+  padding:6px 12px; border-radius:12px;
+  border:1px solid rgba(255,255,255,.28);
+  background:linear-gradient(180deg, rgba(255,255,255,.18), rgba(255,255,255,.05));
+}
+.ccfc-side-link:hover{ background:rgba(255,255,255,.30); color:#fff; }
+
+.ccfc-wrap{ margin-left:calc(var(--sidebar-w) + var(--sidebar-gap)); }
+
+@media (max-width:1250px){
+  .ccfc-sidebar{ position:static; width:min(980px,96vw); margin:0 auto 16px; }
+  .ccfc-wrap{ margin-left:auto; }
+  .ccfc-side-map{ height:240px; }
+}
+/* ===== Sidebar Queens Park Rangers ===== */
+:root{
+  --qpr-blue:#003da5;          /* bleu QPR */
+  --qpr-blue-dark:#012a73;     /* bleu foncé */
+}
+
+.qpr-sidebar{
+  position:fixed;
+  top:calc(var(--header-h) + 16px);
+  left:24px;
+  width:var(--sidebar-w);
+  z-index:10;
+}
+
+.qpr-side-card{
+  position:relative;
+  background:linear-gradient(160deg, var(--qpr-blue) 0%, #004fbd 45%, var(--qpr-blue-dark) 100%);
+  color:#fff;
+  border-radius:22px;
+  padding:18px 16px;
+  outline:1px solid rgba(255,255,255,.12);
+  box-shadow:0 14px 36px rgba(0,0,0,.35), inset 0 1px 0 rgba(255,255,255,.10);
+}
+
+.qpr-side-card::before{
+  content:"";
+  position:absolute; inset:0;
+  background:
+    radial-gradient(120% 60% at -10% -20%, rgba(255,255,255,.18), transparent 55%),
+    radial-gradient(80% 50% at 120% 0%, rgba(255,255,255,.06), transparent 60%);
+  border-radius:inherit;
+  pointer-events:none;
+}
+
+.qpr-side-head{ display:flex; align-items:center; gap:14px; margin-bottom:10px; }
+.qpr-side-logo{ width:72px; height:auto; filter: drop-shadow(0 4px 8px rgba(0,0,0,.35)); }
+.qpr-side-title{ margin:0; font-size:22px; line-height:1.05; }
+.qpr-side-sub{ margin:4px 0 0; opacity:.95; font-size:15px; }
+
+.qpr-side-mapwrap{
+  overflow:hidden; border-radius:14px;
+  outline:1px solid rgba(255,255,255,.18);
+  box-shadow:inset 0 0 0 1px rgba(255,255,255,.06);
+}
+.qpr-side-map{ width:100%; height:300px; border:0; }
+
+.qpr-side-meta{
+  display:flex; justify-content:space-between; align-items:center;
+  margin-top:10px; font-size:14px; opacity:.95;
+}
+.qpr-side-link{
+  color:#fff; text-decoration:none;
+  padding:6px 12px; border-radius:12px;
+  border:1px solid rgba(255,255,255,.28);
+  background:linear-gradient(180deg, rgba(255,255,255,.18), rgba(255,255,255,.05));
+}
+.qpr-side-link:hover{ background:rgba(255,255,255,.30); color:#fff; }
+
+.qpr-wrap{ margin-left:calc(var(--sidebar-w) + var(--sidebar-gap)); }
+
+@media (max-width:1250px){
+  .qpr-sidebar{ position:static; width:min(980px,96vw); margin:0 auto 16px; }
+  .qpr-wrap{ margin-left:auto; }
+  .qpr-side-map{ height:240px; }
+}
+/* ===== Sidebar West Bromwich Albion ===== */
+:root{
+  --wba-navy:#002b5c;        /* bleu marine West Brom */
+  --wba-navy-dark:#001931;   /* plus foncé */
+}
+
+.wba-sidebar{
+  position:fixed;
+  top:calc(var(--header-h) + 16px);
+  left:24px;
+  width:var(--sidebar-w);
+  z-index:10;
+}
+
+.wba-side-card{
+  position:relative;
+  background:linear-gradient(160deg, var(--wba-navy) 0%, #003e82 45%, var(--wba-navy-dark) 100%);
+  color:#fff;
+  border-radius:22px;
+  padding:18px 16px;
+  outline:1px solid rgba(255,255,255,.12);
+  box-shadow:0 14px 36px rgba(0,0,0,.35), inset 0 1px 0 rgba(255,255,255,.10);
+}
+
+.wba-side-card::before{
+  content:"";
+  position:absolute; inset:0;
+  background:
+    radial-gradient(120% 60% at -10% -20%, rgba(255,255,255,.18), transparent 55%),
+    radial-gradient(80% 50% at 120% 0%, rgba(255,255,255,.06), transparent 60%);
+  border-radius:inherit;
+  pointer-events:none;
+}
+
+.wba-side-head{ display:flex; align-items:center; gap:14px; margin-bottom:10px; }
+.wba-side-logo{ width:72px; height:auto; filter:drop-shadow(0 4px 8px rgba(0,0,0,.35)); }
+.wba-side-title{ margin:0; font-size:22px; line-height:1.05; }
+.wba-side-sub{ margin:4px 0 0; opacity:.95; font-size:15px; }
+
+.wba-side-mapwrap{
+  overflow:hidden; border-radius:14px;
+  outline:1px solid rgba(255,255,255,.18);
+  box-shadow:inset 0 0 0 1px rgba(255,255,255,.06);
+}
+.wba-side-map{ width:100%; height:300px; border:0; }
+
+.wba-side-meta{
+  display:flex; justify-content:space-between; align-items:center;
+  margin-top:10px; font-size:14px; opacity:.95;
+}
+.wba-side-link{
+  color:#fff; text-decoration:none;
+  padding:6px 12px; border-radius:12px;
+  border:1px solid rgba(255,255,255,.28);
+  background:linear-gradient(180deg, rgba(255,255,255,.18), rgba(255,255,255,.05));
+}
+.wba-side-link:hover{ background:rgba(255,255,255,.30); color:#fff; }
+
+.wba-wrap{ margin-left:calc(var(--sidebar-w) + var(--sidebar-gap)); }
+
+@media (max-width:1250px){
+  .wba-sidebar{ position:static; width:min(980px,96vw); margin:0 auto 16px; }
+  .wba-wrap{ margin-left:auto; }
+  .wba-side-map{ height:240px; }
+}
+/* ===== Sidebar Leicester City FC ===== */
+:root{
+  --lcfc-blue:#00349c;         /* bleu Leicester */
+  --lcfc-blue-dark:#001f5e;    /* foncé */
+}
+
+.lcfc-sidebar{
+  position:fixed;
+  top:calc(var(--header-h) + 16px);
+  left:24px;
+  width:var(--sidebar-w);
+  z-index:10;
+}
+
+.lcfc-side-card{
+  position:relative;
+  background:linear-gradient(160deg, var(--lcfc-blue) 0%, #0048c3 45%, var(--lcfc-blue-dark) 100%);
+  color:#fff;
+  border-radius:22px;
+  padding:18px 16px;
+  outline:1px solid rgba(255,255,255,.12);
+  box-shadow:0 14px 36px rgba(0,0,0,.35), inset 0 1px 0 rgba(255,255,255,.10);
+}
+
+.lcfc-side-card::before{
+  content:"";
+  position:absolute; inset:0;
+  background:
+    radial-gradient(120% 60% at -10% -20%, rgba(255,255,255,.18), transparent 55%),
+    radial-gradient(80% 50% at 120% 0%, rgba(255,255,255,.06), transparent 60%);
+  border-radius:inherit;
+  pointer-events:none;
+}
+
+.lcfc-side-head{ display:flex; align-items:center; gap:14px; margin-bottom:10px; }
+.lcfc-side-logo{ width:72px; height:auto; filter:drop-shadow(0 4px 8px rgba(0,0,0,.35)); }
+.lcfc-side-title{ margin:0; font-size:22px; line-height:1.05; }
+.lcfc-side-sub{ margin:4px 0 0; opacity:.95; font-size:15px; }
+
+.lcfc-side-mapwrap{
+  overflow:hidden; border-radius:14px;
+  outline:1px solid rgba(255,255,255,.18);
+  box-shadow:inset 0 0 0 1px rgba(255,255,255,.06);
+}
+.lcfc-side-map{ width:100%; height:300px; border:0; }
+
+.lcfc-side-meta{
+  display:flex; justify-content:space-between; align-items:center;
+  margin-top:10px; font-size:14px; opacity:.95;
+}
+.lcfc-side-link{
+  color:#fff; text-decoration:none;
+  padding:6px 12px; border-radius:12px;
+  border:1px solid rgba(255,255,255,.28);
+  background:linear-gradient(180deg, rgba(255,255,255,.18), rgba(255,255,255,.05));
+}
+.lcfc-side-link:hover{ background:rgba(255,255,255,.30); color:#fff; }
+
+.lcfc-wrap{ margin-left:calc(var(--sidebar-w) + var(--sidebar-gap)); }
+
+@media (max-width:1250px){
+  .lcfc-sidebar{ position:static; width:min(980px,96vw); margin:0 auto 16px; }
+  .lcfc-wrap{ margin-left:auto; }
+  .lcfc-side-map{ height:240px; }
+}
+/* ===== Sidebar Aston Villa FC ===== */
+:root{
+  --avfc-claret:#670026;       /* claret Aston Villa */
+  --avfc-blue:#95c4e8;         /* bleu ciel */
+}
+
+.avfc-sidebar{
+  position:fixed;
+  top:calc(var(--header-h) + 16px);
+  left:24px;
+  width:var(--sidebar-w);
+  z-index:10;
+}
+
+.avfc-side-card{
+  position:relative;
+  background:linear-gradient(160deg, var(--avfc-claret) 0%, #8c0033 45%, #4a001a 100%);
+  color:#fff;
+  border-radius:22px;
+  padding:18px 16px;
+  outline:1px solid rgba(255,255,255,.12);
+  box-shadow:0 14px 36px rgba(0,0,0,.35), inset 0 1px 0 rgba(255,255,255,.10);
+}
+
+.avfc-side-card::before{
+  content:"";
+  position:absolute; inset:0;
+  background:
+    radial-gradient(120% 60% at -10% -20%, rgba(255,255,255,.18), transparent 55%),
+    radial-gradient(80% 50% at 120% 0%, rgba(255,255,255,.06), transparent 60%);
+  border-radius:inherit;
+  pointer-events:none;
+}
+
+.avfc-side-head{ display:flex; align-items:center; gap:14px; margin-bottom:10px; }
+.avfc-side-logo{ width:72px; height:auto; filter:drop-shadow(0 4px 8px rgba(0,0,0,.35)); }
+.avfc-side-title{ margin:0; font-size:22px; line-height:1.05; }
+.avfc-side-sub{ margin:4px 0 0; opacity:.95; font-size:15px; }
+
+.avfc-side-mapwrap{
+  overflow:hidden; border-radius:14px;
+  outline:1px solid rgba(255,255,255,.18);
+  box-shadow:inset 0 0 0 1px rgba(255,255,255,.06);
+}
+.avfc-side-map{ width:100%; height:300px; border:0; }
+
+.avfc-side-meta{
+  display:flex; justify-content:space-between; align-items:center;
+  margin-top:10px; font-size:14px; opacity:.95;
+}
+.avfc-side-link{
+  color:#fff; text-decoration:none;
+  padding:6px 12px; border-radius:12px;
+  border:1px solid rgba(255,255,255,.28);
+  background:linear-gradient(180deg, rgba(255,255,255,.18), rgba(255,255,255,.05));
+}
+.avfc-side-link:hover{ background:rgba(255,255,255,.30); color:#fff; }
+
+.avfc-wrap{ margin-left:calc(var(--sidebar-w) + var(--sidebar-gap)); }
+
+@media (max-width:1250px){
+  .avfc-sidebar{ position:static; width:min(980px,96vw); margin:0 auto 16px; }
+  .avfc-wrap{ margin-left:auto; }
+  .avfc-side-map{ height:240px; }
+}
+/* ===== Sidebar Huddersfield Town AFC ===== */
+:root{
+  --htafc-blue:#005baa;   /* bleu Huddersfield */
+  --htafc-white:#ffffff;
+}
+
+.htafc-sidebar{
+  position:fixed;
+  top:calc(var(--header-h) + 16px);
+  left:24px;
+  width:var(--sidebar-w);
+  z-index:10;
+}
+
+.htafc-side-card{
+  position:relative;
+  background:linear-gradient(160deg, var(--htafc-blue) 0%, #003f76 50%, #002748 100%);
+  color:#fff;
+  border-radius:22px;
+  padding:18px 16px;
+  outline:1px solid rgba(255,255,255,.12);
+  box-shadow:0 14px 36px rgba(0,0,0,.35), inset 0 1px 0 rgba(255,255,255,.10);
+}
+
+.htafc-side-card::before{
+  content:"";
+  position:absolute; inset:0;
+  background:
+    radial-gradient(120% 60% at -10% -20%, rgba(255,255,255,.18), transparent 55%),
+    radial-gradient(80% 50% at 120% 0%, rgba(255,255,255,.06), transparent 60%);
+  border-radius:inherit;
+  pointer-events:none;
+}
+
+.htafc-side-head{ display:flex; align-items:center; gap:14px; margin-bottom:10px; }
+.htafc-side-logo{ width:72px; height:auto; filter:drop-shadow(0 4px 8px rgba(0,0,0,.35)); }
+.htafc-side-title{ margin:0; font-size:22px; line-height:1.05; }
+.htafc-side-sub{ margin:4px 0 0; opacity:.95; font-size:15px; }
+
+.htafc-side-mapwrap{
+  overflow:hidden; border-radius:14px;
+  outline:1px solid rgba(255,255,255,.18);
+  box-shadow:inset 0 0 0 1px rgba(255,255,255,.06);
+}
+.htafc-side-map{ width:100%; height:300px; border:0; }
+
+.htafc-side-meta{
+  display:flex; justify-content:space-between; align-items:center;
+  margin-top:10px; font-size:14px; opacity:.95;
+}
+.htafc-side-link{
+  color:#fff; text-decoration:none;
+  padding:6px 12px; border-radius:12px;
+  border:1px solid rgba(255,255,255,.28);
+  background:linear-gradient(180deg, rgba(255,255,255,.18), rgba(255,255,255,.05));
+}
+.htafc-side-link:hover{ background:rgba(255,255,255,.30); color:#fff; }
+
+.htafc-wrap{ margin-left:calc(var(--sidebar-w) + var(--sidebar-gap)); }
+
+@media (max-width:1250px){
+  .htafc-sidebar{ position:static; width:min(980px,96vw); margin:0 auto 16px; }
+  .htafc-wrap{ margin-left:auto; }
+  .htafc-side-map{ height:240px; }
+}
+:root{
+  /* Palette Blackburn Rovers */
+  --brfc-blue: #0057b8;   /* bleu principal */
+  --brfc-blue-dk: #003e80;/* bleu foncé */
+  --brfc-navy: #002a59;   /* bleu nuit */
+  --brfc-white:#ffffff;
+}
+
+/* --- Sidebar Blackburn --- */
+.brfc-sidebar{
+  position:fixed;
+  top:calc(var(--header-h) + 16px);
+  left:24px;
+  width:var(--sidebar-w);
+  z-index:10;
+}
+
+.brfc-side-card{
+  position:relative;
+  background:linear-gradient(160deg, var(--brfc-blue) 0%, var(--brfc-blue-dk) 50%, var(--brfc-navy) 100%);
+  color:#fff;
+  border-radius:22px;
+  padding:18px 16px;
+  outline:1px solid rgba(255,255,255,.12);
+  box-shadow:0 14px 36px rgba(0,0,0,.35), inset 0 1px 0 rgba(255,255,255,.10);
+}
+
+/* léger reflet esthétique */
+.brfc-side-card::before{
+  content:"";
+  position:absolute; inset:0;
+  background:
+    radial-gradient(120% 60% at -10% -20%, rgba(255,255,255,.18), transparent 55%),
+    radial-gradient(80% 50% at 120% 0%, rgba(255,255,255,.06), transparent 60%);
+  border-radius:inherit;
+  pointer-events:none;
+}
+
+.brfc-side-head{ display:flex; align-items:center; gap:14px; margin-bottom:10px; }
+.brfc-side-logo{ width:72px; height:auto; filter:drop-shadow(0 4px 8px rgba(0,0,0,.35)); }
+.brfc-side-title{ margin:0; font-size:22px; line-height:1.05; }
+.brfc-side-sub{ margin:4px 0 0; opacity:.95; font-size:15px; }
+
+.brfc-side-mapwrap{
+  overflow:hidden; border-radius:14px;
+  outline:1px solid rgba(255,255,255,.18);
+  box-shadow:inset 0 0 0 1px rgba(255,255,255,.06);
+}
+.brfc-side-map{ width:100%; height:300px; border:0; }
+
+.brfc-side-meta{
+  display:flex; justify-content:space-between; align-items:center;
+  margin-top:10px; font-size:14px; opacity:.95;
+}
+.brfc-side-link{
+  color:var(--brfc-white); text-decoration:none;
+  padding:6px 12px; border-radius:12px;
+  border:1px solid rgba(255,255,255,.28);
+  background:linear-gradient(180deg, rgba(255,255,255,.18), rgba(255,255,255,.05));
+}
+.brfc-side-link:hover{ background:rgba(255,255,255,.30); color:#fff; }
+
+/* décale le contenu principal quand la sidebar est fixe */
+.brfc-wrap{ margin-left:calc(var(--sidebar-w) + var(--sidebar-gap)); }
+
+/* responsive */
+@media (max-width:1250px){
+  .brfc-sidebar{ position:static; width:min(980px,96vw); margin:0 auto 16px; }
+  .brfc-wrap{ margin-left:auto; }
+  .brfc-side-map{ height:240px; }
+}
+:root{
+  /* Palette Middlesbrough */
+  --boro-red: #d71920;      /* rouge principal */
+  --boro-red-dk: #9f1116;   /* rouge foncé */
+  --boro-wine: #6f0c10;     /* bordeaux profond */
+}
+
+/* Position & largeur */
+.boro-sidebar{
+  position: fixed;
+  top: calc(var(--header-h) + 16px);
+  left: 24px;
+  width: var(--sidebar-w);
+  z-index: 10;
+}
+
+/* Carte / panneau */
+.boro-side-card{
+  position: relative;
+  background: linear-gradient(160deg, var(--boro-red) 0%, var(--boro-red-dk) 48%, var(--boro-wine) 100%);
+  color: #fff;
+  border-radius: 22px;
+  padding: 18px 16px;
+  outline: 1px solid rgba(255,255,255,.12);
+  box-shadow: 0 14px 36px rgba(0,0,0,.35), inset 0 1px 0 rgba(255,255,255,.10);
+}
+
+/* léger reflet */
+.boro-side-card::before{
+  content:"";
+  position:absolute; inset:0;
+  background:
+    radial-gradient(120% 60% at -10% -20%, rgba(255,255,255,.18), transparent 55%),
+    radial-gradient(80% 50% at 120% 0%, rgba(255,255,255,.06), transparent 60%);
+  border-radius: inherit;
+  pointer-events: none;
+}
+
+.boro-side-head{ display:flex; align-items:center; gap:14px; margin-bottom:10px; }
+.boro-side-logo{ width:72px; height:auto; filter: drop-shadow(0 4px 8px rgba(0,0,0,.35)); }
+.boro-side-title{ margin:0; font-size:22px; line-height:1.05; }
+.boro-side-sub{ margin:4px 0 0; opacity:.95; font-size:15px; }
+
+.boro-side-mapwrap{
+  overflow:hidden; border-radius:14px;
+  outline:1px solid rgba(255,255,255,.18);
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,.06);
+}
+.boro-side-map{ width:100%; height:300px; border:0; }
+
+.boro-side-meta{
+  display:flex; justify-content:space-between; align-items:center;
+  margin-top:10px; font-size:14px; opacity:.95;
+}
+.boro-side-link{
+  color:#fff; text-decoration:none;
+  padding:6px 12px; border-radius:12px;
+  border:1px solid rgba(255,255,255,.28);
+  background: linear-gradient(180deg, rgba(255,255,255,.18), rgba(255,255,255,.05));
+}
+.boro-side-link:hover{ background: rgba(255,255,255,.28); color:#fff; }
+
+/* si tu veux décaler le contenu principal quand la sidebar est fixe */
+.boro-wrap{ margin-left: calc(var(--sidebar-w) + var(--sidebar-gap)); }
+
+/* Responsive : empile au-dessous de 1250px */
+@media (max-width: 1250px){
+  .boro-sidebar{ position: static; width: min(980px, 96vw); margin: 0 auto 16px; }
+  .boro-wrap{ margin-left: auto; }
+  .boro-side-map{ height: 240px; }
+}
+:root{
+  /* Couleurs Norwich City */
+  --nor-yellow:#f6d600;
+  --nor-green:#007b39;
+  --nor-green-dk:#005225;
+}
+
+/* Position */
+.nor-sidebar{
+  position: fixed;
+  top: calc(var(--header-h) + 16px);
+  left: 24px;
+  width: var(--sidebar-w);
+  z-index: 10;
+}
+
+/* Carte latérale */
+.nor-side-card{
+  position: relative;
+  background: linear-gradient(160deg, var(--nor-yellow) 0%, var(--nor-green) 45%, var(--nor-green-dk) 100%);
+  color: #fff;
+  border-radius: 22px;
+  padding: 18px 16px;
+  outline: 1px solid rgba(255,255,255,.12);
+  box-shadow: 0 14px 36px rgba(0,0,0,.35), inset 0 1px 0 rgba(255,255,255,.10);
+}
+
+/* reflets */
+.nor-side-card::before{
+  content:"";
+  position:absolute; inset:0;
+  background:
+    radial-gradient(120% 60% at -10% -20%, rgba(255,255,255,.18), transparent 55%),
+    radial-gradient(80% 50% at 120% 0%, rgba(255,255,255,.08), transparent 60%);
+  border-radius: inherit;
+  pointer-events: none;
+}
+
+/* Contenu */
+.nor-side-head{ display:flex; align-items:center; gap:14px; margin-bottom:10px; }
+.nor-side-logo{ width:72px; height:auto; filter: drop-shadow(0 4px 8px rgba(0,0,0,.35)); }
+.nor-side-title{ margin:0; font-size:22px; line-height:1.05; }
+.nor-side-sub{ margin:4px 0 0; opacity:.95; font-size:15px; }
+
+/* Carte */
+.nor-side-mapwrap{
+  overflow:hidden; border-radius:14px;
+  outline:1px solid rgba(255,255,255,.18);
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,.06);
+}
+.nor-side-map{ width:100%; height:300px; border:0; }
+
+/* Meta */
+.nor-side-meta{
+  display:flex; justify-content:space-between; align-items:center;
+  margin-top:10px; font-size:14px; opacity:.95;
+}
+.nor-side-link{
+  color:#fff; text-decoration:none;
+  padding:6px 12px; border-radius:12px;
+  border:1px solid rgba(255,255,255,.28);
+  background: linear-gradient(180deg, rgba(255,255,255,.18), rgba(255,255,255,.05));
+}
+.nor-side-link:hover{ background: rgba(255,255,255,.32); }
+
+/* Adaptation responsive */
+@media (max-width:1250px){
+  .nor-sidebar{ position: static; width: min(980px,96vw); margin:0 auto 16px; }
+  .nor-side-map{ height: 240px; }
+}
+:root{
+  /* Couleurs Derby County */
+  --derby-black:#0d0d0d;
+  --derby-grey:#2b2b2b;
+  --derby-white:#ffffff;
+}
+
+/* Position */
+.derby-sidebar{
+  position: fixed;
+  top: calc(var(--header-h) + 16px);
+  left: 24px;
+  width: var(--sidebar-w);
+  z-index: 10;
+}
+
+/* Carte latérale */
+.derby-side-card{
+  position: relative;
+  background: linear-gradient(160deg, var(--derby-black) 0%, var(--derby-grey) 45%, #000000 100%);
+  color: #fff;
+  border-radius: 22px;
+  padding: 18px 16px;
+  outline: 1px solid rgba(255,255,255,.14);
+  box-shadow: 0 14px 36px rgba(0,0,0,.45), inset 0 1px 0 rgba(255,255,255,.10);
+}
+
+.derby-side-card::before{
+  content:"";
+  position:absolute; inset:0;
+  background:
+    radial-gradient(140% 70% at -10% -20%, rgba(255,255,255,.15), transparent 60%),
+    radial-gradient(90% 55% at 120% 0%, rgba(255,255,255,.08), transparent 65%);
+  border-radius: inherit;
+  pointer-events: none;
+}
+
+/* Contenu */
+.derby-side-head{ display:flex; align-items:center; gap:14px; margin-bottom:10px; }
+.derby-side-logo{ width:72px; height:auto; filter: drop-shadow(0 4px 8px rgba(0,0,0,.45)); }
+.derby-side-title{ margin:0; font-size:22px; line-height:1.05; }
+.derby-side-sub{ margin:4px 0 0; opacity:.95; font-size:15px; }
+
+/* Carte */
+.derby-side-mapwrap{
+  overflow:hidden; border-radius:14px;
+  outline:1px solid rgba(255,255,255,.18);
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,.06);
+}
+.derby-side-map{ width:100%; height:300px; border:0; }
+
+/* Meta */
+.derby-side-meta{
+  display:flex; justify-content:space-between; align-items:center;
+  margin-top:10px; font-size:14px; opacity:.95;
+}
+.derby-side-link{
+  color:#fff; text-decoration:none;
+  padding:6px 12px; border-radius:12px;
+  border:1px solid rgba(255,255,255,.28);
+  background: linear-gradient(180deg, rgba(255,255,255,.18), rgba(255,255,255,.05));
+}
+.derby-side-link:hover{ background: rgba(255,255,255,.32); }
+
+/* Responsive */
+@media (max-width:1250px){
+  .derby-sidebar{ position: static; width: min(980px,96vw); margin:0 auto 16px; }
+  .derby-side-map{ height: 240px; }
+}
+:root{
+  --charlton-red:#c9082a;
+  --charlton-dark:#6b000f;
+  --charlton-black:#0b0b0b;
+}
+
+/* Position */
+.charlton-sidebar{
+  position: fixed;
+  top: calc(var(--header-h) + 16px);
+  left: 24px;
+  width: var(--sidebar-w);
+  z-index: 10;
+}
+
+/* Carte */
+.charlton-side-card{
+  position: relative;
+  background: linear-gradient(150deg, var(--charlton-red) 0%, var(--charlton-dark) 50%, var(--charlton-black) 100%);
+  color: #fff;
+  border-radius: 22px;
+  padding: 18px 16px;
+  outline: 1px solid rgba(255,255,255,.18);
+  box-shadow: 0 14px 36px rgba(0,0,0,.45), inset 0 1px 0 rgba(255,255,255,.10);
+}
+
+.charlton-side-card::before{
+  content:"";
+  position:absolute; inset:0;
+  background:
+    radial-gradient(120% 60% at -10% -20%, rgba(255,255,255,.18), transparent 55%),
+    radial-gradient(90% 55% at 120% 0%, rgba(255,255,255,.08), transparent 65%);
+  border-radius:inherit;
+  pointer-events:none;
+}
+
+/* Contenu */
+.charlton-side-head{ display:flex; align-items:center; gap:14px; margin-bottom:10px; }
+.charlton-side-logo{ width:72px; height:auto; filter:drop-shadow(0 4px 8px rgba(0,0,0,.45)); }
+.charlton-side-title{ margin:0; font-size:22px; line-height:1.05; }
+.charlton-side-sub{ margin:4px 0 0; opacity:.95; font-size:15px; }
+
+/* Carte OSM */
+.charlton-side-mapwrap{
+  overflow:hidden; border-radius:14px;
+  outline:1px solid rgba(255,255,255,.22);
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,.06);
+}
+.charlton-side-map{ width:100%; height:300px; border:0; }
+
+/* Meta */
+.charlton-side-meta{
+  display:flex; justify-content:space-between; align-items:center;
+  margin-top:10px; font-size:14px; opacity:.95;
+}
+.charlton-side-link{
+  color:#fff; text-decoration:none;
+  padding:6px 12px; border-radius:12px;
+  border:1px solid rgba(255,255,255,.28);
+  background: linear-gradient(180deg, rgba(255,255,255,.18), rgba(255,255,255,.05));
+}
+.charlton-side-link:hover{ background:rgba(255,255,255,.30); }
+
+/* Responsive */
+@media (max-width:1250px){
+  .charlton-sidebar{ position:static; width:min(980px,96vw); margin:0 auto 16px; }
+  .charlton-side-map{ height:240px; }
+}
+:root{
+  --watford-yellow:#f8e500;
+  --watford-red:#d2001c;
+  --watford-black:#0b0b0b;
+}
+
+/* Position */
+.watford-sidebar{
+  position: fixed;
+  top: calc(var(--header-h) + 16px);
+  left: 24px;
+  width: var(--sidebar-w);
+  z-index: 10;
+}
+
+/* Card */
+.watford-side-card{
+  position: relative;
+  background: linear-gradient(160deg, var(--watford-yellow) 0%, var(--watford-red) 45%, var(--watford-black) 100%);
+  color: #fff;
+  border-radius: 22px;
+  padding: 18px 16px;
+  outline: 1px solid rgba(255,255,255,.15);
+  box-shadow: 0 14px 36px rgba(0,0,0,.45), inset 0 1px 0 rgba(255,255,255,.10);
+}
+
+.watford-side-card::before{
+  content:"";
+  position:absolute; inset:0;
+  background:
+    radial-gradient(120% 60% at -10% -20%, rgba(255,255,255,.18), transparent 55%),
+    radial-gradient(80% 50% at 120% 0%, rgba(255,255,255,.08), transparent 60%);
+  border-radius:inherit;
+  pointer-events:none;
+}
+
+/* Content */
+.watford-side-head{ display:flex; align-items:center; gap:14px; margin-bottom:10px; }
+.watford-side-logo{ width:72px; height:auto; filter:drop-shadow(0 4px 8px rgba(0,0,0,.45)); }
+.watford-side-title{ margin:0; font-size:22px; line-height:1.05; }
+.watford-side-sub{ margin:4px 0 0; opacity:.95; font-size:15px; }
+
+/* Map */
+.watford-side-mapwrap{
+  overflow:hidden; border-radius:14px;
+  outline:1px solid rgba(255,255,255,.22);
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,.06);
+}
+.watford-side-map{ width:100%; height:300px; border:0; }
+
+/* Meta */
+.watford-side-meta{
+  display:flex; justify-content:space-between; align-items:center;
+  margin-top:10px; font-size:14px; opacity:.95;
+}
+.watford-side-link{
+  color:#fff; text-decoration:none;
+  padding:6px 12px; border-radius:12px;
+  border:1px solid rgba(255,255,255,.28);
+  background: linear-gradient(180deg, rgba(255,255,255,.18), rgba(255,255,255,.05));
+}
+.watford-side-link:hover{ background:rgba(255,255,255,.30); }
+
+/* Responsive */
+@media (max-width:1250px){
+  .watford-sidebar{ position:static; width:min(980px,96vw); margin:0 auto 16px; }
+  .watford-side-map{ height:240px; }
+}
+:root{
+  --afcb-red:#d00000;   /* rouge AFCB */
+  --afcb-dark:#111111;  /* noir très sombre */
+}
+
+.afcb-sidebar{
+  position: fixed;
+  top: calc(var(--header-h) + 16px);
+  left: 24px;
+  width: var(--sidebar-w);
+  z-index: 10;
+}
+
+/* Carte / panneau */
+.afcb-side-card{
+  position: relative;
+  background: linear-gradient(160deg, var(--afcb-red) 0%, #970000 45%, var(--afcb-dark) 100%);
+  color:#fff;
+  border-radius:22px;
+  padding:18px 16px;
+  outline:1px solid rgba(255,255,255,.14);
+  box-shadow:0 14px 36px rgba(0,0,0,.45), inset 0 1px 0 rgba(255,255,255,.10);
+}
+
+/* léger reflet esthétique */
+.afcb-side-card::before{
+  content:"";
+  position:absolute; inset:0;
+  background:
+    radial-gradient(120% 60% at -10% -20%, rgba(255,255,255,.16), transparent 55%),
+    radial-gradient(80% 50% at 120% 0%, rgba(255,255,255,.06), transparent 60%);
+  border-radius:inherit;
+  pointer-events:none;
+}
+
+.afcb-side-head{ display:flex; align-items:center; gap:14px; margin-bottom:10px; }
+.afcb-side-logo{ width:72px; height:auto; filter: drop-shadow(0 4px 8px rgba(0,0,0,.45)); }
+.afcb-side-title{ margin:0; font-size:22px; line-height:1.05; }
+.afcb-side-sub{ margin:4px 0 0; opacity:.95; font-size:15px; }
+
+/* Map */
+.afcb-side-mapwrap{
+  overflow:hidden; border-radius:14px;
+  outline:1px solid rgba(255,255,255,.20);
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,.06);
+}
+.afcb-side-map{ width:100%; height:300px; border:0; }
+
+/* Meta */
+.afcb-side-meta{
+  display:flex; justify-content:space-between; align-items:center;
+  margin-top:10px; font-size:14px; opacity:.95;
+}
+.afcb-side-link{
+  color:#fff; text-decoration:none;
+  padding:6px 12px; border-radius:12px;
+  border:1px solid rgba(255,255,255,.28);
+  background: linear-gradient(180deg, rgba(255,255,255,.18), rgba(255,255,255,.05));
+}
+.afcb-side-link:hover{ background: rgba(255,255,255,.28); }
+
+/* Décalage contenu si tu utilises une colonne fixe à gauche */
+.afcb-wrap{ margin-left: calc(var(--sidebar-w) + var(--sidebar-gap)); }
+
+/* Responsive */
+@media (max-width:1250px){
+  .afcb-sidebar{ position: static; width: min(980px, 96vw); margin: 0 auto 16px; }
+  .afcb-side-map{ height: 240px; }
+}

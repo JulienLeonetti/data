@@ -1,0 +1,412 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Premier League — Vidéo & Matchs</title>
+  <link rel="stylesheet" href="../style.css">
+  <script src="https://cdn.jsdelivr.net/npm/echarts@5/dist/echarts.min.js"></script>
+</head>
+<body>
+  <!-- HEADER (inchangé) -->
+  <header class="pl-header">
+    <div class="pl-wrap">
+      <img class="pl-logo"
+           src="https://upload.wikimedia.org/wikipedia/en/f/f2/Premier_League_Logo.svg"
+           alt="Premier League">
+      <nav class="pl-nav">
+        <a href="../index.html" class="nav-link">Accueil</a>
+        <a href="../classement.html" class="nav-link">Classement</a>
+        <a href="../equipes.html" class="nav-link">Équipes</a>
+        <a href="../comparaison.html" class="nav-link">Comparaison</a>
+        <a href="../probabilites.html" class="nav-link">Chances de gagner</a>
+      </nav>
+    </div>
+  </header>
+  <!-- SIDEBAR LIVERPOOL -->
+<!-- SIDEBAR HUDDERSFIELD TOWN -->
+<aside class="htafc-sidebar" aria-labelledby="htafc-side-title">
+  <div class="htafc-side-card">
+    <div class="htafc-side-head">
+      <img class="htafc-side-logo"
+           src="../logo/huddersfield.png"
+           alt="Huddersfield Town">
+      <div>
+        <h2 id="htafc-side-title" class="htafc-side-title">Huddersfield Town</h2>
+        <p class="htafc-side-sub">Stade&nbsp;: <strong>John Smith's Stadium</strong> — Huddersfield, UK</p>
+      </div>
+    </div>
+
+    <div class="htafc-side-mapwrap">
+      <iframe
+        class="htafc-side-map"
+        title="Carte - John Smith's Stadium"
+        src="https://www.openstreetmap.org/export/embed.html?bbox=-1.7882%2C53.6443%2C-1.7482%2C53.6643&amp;layer=mapnik&amp;marker=53.6543%2C-1.7682"
+        loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade"></iframe>
+    </div>
+
+    <div class="htafc-side-meta">
+      <span>Capacité&nbsp;: env. 24&nbsp;500</span>
+      <a class="htafc-side-link"
+         href="https://www.openstreetmap.org/?mlat=53.6543&mlon=-1.7682#map=16/53.6543/-1.7682"
+         target="_blank" rel="noopener">Ouvrir la carte</a>
+    </div>
+  </div>
+</aside>
+
+  
+
+<!-- WRAP + entête LFC (noms d’ID attendus par le JS) -->
+<section id="lfc" class="lfc-wrap" aria-labelledby="lfc-title">
+    <div class="lfc-card">
+      <h2 id="lfc-title">
+        Huddersfield Town — Tableau de bord
+        <span id="lfc-badge" class="lfc-badge">Saison 2006-2007</span>
+      </h2>
+      <div class="table-controls" style="margin-top:6px;display:flex;gap:16px;flex-wrap:wrap">
+        <label class="table-season">
+          <span>Saison</span>
+          <select id="lfc-season-select"></select>
+        </label>
+      </div>
+    </div>
+  
+    <!-- (garde ensuite tes cartes existantes) -->
+    <div class="lfc-card">
+      <h2>Indicateurs clés</h2>
+      <div class="lfc-kpis" id="lfc-kpis">
+        <div class="lfc-kpi"><div class="lfc-glow"></div><h3>Victoires</h3><div class="num" data-key="wins">–</div></div>
+        <div class="lfc-kpi"><div class="lfc-glow"></div><h3>Défaites</h3><div class="num" data-key="losses">–</div></div>
+        <div class="lfc-kpi"><div class="lfc-glow"></div><h3>Buts marqués</h3><div class="num" data-key="goals">–</div></div>
+        <div class="lfc-kpi"><div class="lfc-glow"></div><h3>Clean sheets</h3><div class="num" data-key="clean_sheet">–</div></div>
+      </div>
+    </div>
+  
+    <div class="lfc-grid">
+      <div class="lfc-card">
+        <h2>Répartition des résultats</h2>
+        <div id="lfc-chart-results" class="lfc-chart"></div>
+      </div>
+      <div class="lfc-card">
+        <h2>Domicile vs Extérieur — buts & encaissés</h2>
+        <div id="lfc-chart-goals" class="lfc-chart"></div>
+      </div>
+    </div>
+  
+    <div class="lfc-card">
+      <h2>Profil statistique</h2>
+      <div id="lfc-chart-radar" class="lfc-chart"></div>
+    </div>
+  
+    <div class="lfc-card">
+      <div class="lfc-card-header" style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:8px;">
+        <h2 class="lfc-card-title">Huddersfield Town vs moyenne premiere ligue</h2>
+        <label class="table-season"><span>Statistique</span><select id="lfc-metric"></select></label>
+      </div>
+      <div id="lfc-chart-metric" class="lfc-chart"></div>
+    </div>
+  </section>
+  
+  <footer class="footer">
+    <div class="logos-track">
+      <div class="logos-slide">
+        <img src="https://upload.wikimedia.org/wikipedia/en/0/0c/Liverpool_FC.svg" alt="Liverpool">
+        <img src="https://upload.wikimedia.org/wikipedia/en/5/53/Arsenal_FC.svg" alt="Arsenal">
+        <img src="https://upload.wikimedia.org/wikipedia/en/b/b4/Tottenham_Hotspur.svg" alt="Tottenham">
+        <img src="https://upload.wikimedia.org/wikipedia/en/e/eb/Manchester_City_FC_badge.svg" alt="Man City">
+        <img src="https://upload.wikimedia.org/wikipedia/en/7/7a/Manchester_United_FC_crest.svg" alt="Man Utd">
+        <img src="https://upload.wikimedia.org/wikipedia/en/c/cc/Chelsea_FC.svg" alt="Chelsea">
+        <img src="https://upload.wikimedia.org/wikipedia/en/5/56/Newcastle_United_Logo.svg" alt="Newcastle">
+
+        <img src="../logo/everton.png" alt="Everton">
+        <img src="../logo/crystal-palace.png" alt="Crystal Palace">
+        <img src="../logo/west-ham.png" alt="West Ham">
+        <img src="../logo/fulham.png" alt="Fulham">
+        <img src="../logo/wolves.png" alt="Wolves">
+        <img src="../logo/brighton.png" alt="Brighton">
+        <img src="../logo/burnley.png" alt="Burnley">
+        <img src="../logo/sheffield.png" alt="Sheffield">
+        <img src="../logo/southampton.png" alt="Southampton">
+        <img src="../logo/portsmouth.png" alt="Portsmouth">
+        <img src="../logo/sunderland.png" alt="Sunderland">
+        <img src="../logo/stoke-city.png" alt="Stoke City">
+        <img src="../logo/swansea.png" alt="Swansea">
+        <img src="../logo/wigan.png" alt="Wigan">
+        <img src="../logo/blackpool.png" alt="Blackpool">
+        <img src="../logo/hull-city.png" alt="Hull City">
+        <img src="../logo/reading.png" alt="Reading">
+        <img src="../logo/bolton.png" alt="Bolton">
+        <img src="../logo/birmingham.png" alt="Birmingham City">
+        <img src="../logo/cardiff.png" alt="Cardiff">
+        <img src="../logo/qpr.png" alt="QPR">
+        <img src="../logo/west-brom.png" alt="West Brom">
+        <img src="../logo/leicester.png" alt="Leicester">
+        <img src="../logo/aston-villa.png" alt="Aston Villa">
+        <img src="../logo/blackburn.png" alt="Blackburn Rovers">
+        <img src="../logo/huddersfield.png" alt="Huddersfield Town">
+        <img src="../logo/derby.png" alt="Derby County">
+        <img src="../logo/charlton.png" alt="Charlton Athletic">
+        <img src="../logo/norwich.png" alt="Norwich City">
+        <img src="../logo/watford.png" alt="Watford">
+        <img src="../logo/middlesbrough.png" alt="Middlesbrough">
+        <img src="../logo/bournemouth.png" alt="Bournemouth">
+      </div>
+      
+      <div class="logos-slide" aria-hidden="true">
+       
+      </div>
+    </div>
+  </footer>
+  <script>
+    /* =======================
+       CONFIG & SOURCES
+    ======================= */
+    const LFC_MATCHES_URL = '../data/csvjson.json';
+    const LFC_STATS_URL   = '../data/csvjson%20(1).json'; // encodé (espace + parenthèses)
+    const TEAM = 'Huddersfield Town';
+   // 2006-2007 → 2017-2018
+const SEASONS = Array.from({length:12}, (_,i)=>2006+i).map(y=>`${y}-${y+1}`);
+
+// Métadonnées & palette vive
+const METRICS = {
+  goals:'Buts', clean_sheet:'Clean sheets', total_pass:'Passes',
+  total_scoring_att:'Tirs', ontarget_scoring_att:'Tirs cadrés',
+  total_tackle:'Tacles', total_yel_card:'Cartons jaunes', total_red_card:'Cartons rouges'
+};
+const RADAR_DEF = [
+  {key:'goals', label:'Buts', max:120},
+  {key:'total_tackle', label:'Tacles', max:1100},
+  {key:'total_pass', label:'Passes', max:20000},
+  {key:'clean_sheet', label:'Clean sheets', max:25},
+  {key:'ontarget_scoring_att', label:'Tirs cadrés', max:300},
+  {key:'total_scoring_att', label:'Tirs', max:900}
+];
+const COL = {
+  W:'#00e676', D:'#ffea00', L:'#ff1744',    // Résultats V/N/D : vert/jaune/rouge vifs
+  TEAM:'#0066ff', AVG:'#cfd8dc',            // Comparatif : bleu vif TEAM / gris clair
+  RADAR:'#00eaff'                           // Radar cyan néon
+};
+
+/* ===== CHARGEMENT (cache) ===== */
+let MATCHES=null, STATS=null;
+async function loadAll(){
+  if (MATCHES && STATS) return [MATCHES, STATS];
+  const [m,s] = await Promise.all([
+    fetch(LFC_MATCHES_URL).then(r=>{ if(!r.ok) throw new Error('HTTP '+r.status+' matches'); return r.json(); }),
+    fetch(LFC_STATS_URL).then(r=>{ if(!r.ok) throw new Error('HTTP '+r.status+' stats'); return r.json(); })
+  ]);
+  MATCHES = m; STATS = s; return [m,s];
+}
+
+/* ===== HELPERS ===== */
+function countUp(el, to, ms=600){
+  const start=performance.now();
+  (function step(t){
+    const p=Math.min(1,(t-start)/ms), e=1-Math.pow(1-p,3);
+    el.textContent = Math.round(to*e).toLocaleString('fr-FR');
+    if(p<1) requestAnimationFrame(step);
+  })(start);
+}
+
+function resultBreakdown(ms){
+  let home={W:0,D:0,L:0,gf:0,ga:0}, away={W:0,D:0,L:0,gf:0,ga:0};
+  for(const m of ms){
+    const h = (m.home_team===TEAM);
+    const gf = h ? m.home_goals : m.away_goals;
+    const ga = h ? m.away_goals : m.home_goals;
+    const o  = h ? home : away;
+    o.gf += gf; o.ga += ga;
+    if(gf>ga) o.W++; else if(gf===ga) o.D++; else o.L++;
+  }
+  return {home,away};
+}
+
+function normStats(raw){
+  return RADAR_DEF.map(d=>{
+    const real = Number(raw?.[d.key])||0;
+    const value = Math.min(1, d.max ? real/d.max : 0);
+    return {name:d.label, value, real};
+  });
+}
+
+function fillKPIs(s){
+  const map={wins:+s?.wins||0, losses:+s?.losses||0, goals:+s?.goals||0, clean_sheet:+s?.clean_sheet||0};
+  document.querySelectorAll('#lfc-kpis .num').forEach(el=>countUp(el, map[el.dataset.key]||0));
+}
+
+function showError(msg){
+  const box=document.createElement('div');
+  box.className='lfc-error';
+  box.textContent='Erreur données : '+msg;
+  document.getElementById('lfc')?.prepend(box);
+}
+
+/* ===== ECHARTS ===== */
+let CH_RES=null, CH_GOALS=null, CH_RADAR=null, CH_METRIC=null, RESIZE_BOUND=false;
+
+// Donuts V/N/D (vif)
+function renderResults(br){
+  const el = document.getElementById('lfc-chart-results');
+  CH_RES ||= echarts.init(el);
+
+  const leftCenter  = ['28%','52%'];
+  const rightCenter = ['72%','52%'];
+
+  CH_RES.setOption({
+    color:[COL.W, COL.D, COL.L],
+    tooltip:{ trigger:'item', confine:true, appendToBody:true, formatter:'{b}: {c} ({d}%)' },
+    legend:{ top:6, textStyle:{color:'#fff'} },
+    graphic:[
+      {type:'text', left:leftCenter[0],  top:'88%', style:{text:'Domicile',  fill:'#fff', fontSize:12, align:'center'}},
+      {type:'text', left:rightCenter[0], top:'88%', style:{text:'Extérieur', fill:'#fff', fontSize:12, align:'center'}}
+    ],
+    series:[
+      { name:'Domicile', type:'pie', radius:['32%','55%'], center:leftCenter,
+        avoidLabelOverlap:false, label:{show:true, formatter:'{b}', fontSize:11},
+        labelLine:{length:10, length2:6},
+        data:[{value:br.home.W,name:'V'},{value:br.home.D,name:'N'},{value:br.home.L,name:'D'}]
+      },
+      { name:'Extérieur', type:'pie', radius:['32%','55%'], center:rightCenter,
+        avoidLabelOverlap:false, label:{show:true, formatter:'{b}', fontSize:11},
+        labelLine:{length:10, length2:6},
+        data:[{value:br.away.W,name:'V'},{value:br.away.D,name:'N'},{value:br.away.L,name:'D'}]
+      }
+    ],
+    textStyle:{color:'#fff'}
+  }, true);
+}
+
+// Barres buts (vif)
+function renderGoals(br){
+  CH_GOALS ||= echarts.init(document.getElementById('lfc-chart-goals'));
+  CH_GOALS.setOption({
+    color:[COL.W, COL.L],
+    tooltip:{ trigger:'axis', axisPointer:{type:'shadow'}, confine:true, appendToBody:true },
+    legend:{top:0,textStyle:{color:'#fff'}},
+    xAxis:{type:'category',data:['Domicile','Extérieur'],axisLabel:{color:'#fff'}},
+    yAxis:{type:'value',axisLabel:{color:'#fff'},splitLine:{show:true,lineStyle:{opacity:.15}}},
+    series:[
+      {name:'Buts marqués',  type:'bar', data:[br.home.gf, br.away.gf], itemStyle:{borderRadius:[6,6,0,0]}},
+      {name:'Buts encaissés',type:'bar', data:[br.home.ga, br.away.ga], itemStyle:{borderRadius:[6,6,0,0]}}
+    ],
+    textStyle:{color:'#fff'}
+  }, true);
+}
+
+// Radar cyan néon
+function renderRadar(items){
+  CH_RADAR ||= echarts.init(document.getElementById('lfc-chart-radar'));
+  CH_RADAR.setOption({
+    tooltip:{
+      trigger:'item', confine:true, appendToBody:true,
+      formatter: () => {
+        const lines = [`<b>${TEAM}</b>`];
+        items.forEach(it => lines.push(`${it.name} : <b>${(it.real||0).toLocaleString('fr-FR')}</b>`));
+        return lines.join('<br>');
+      }
+    },
+    radar:{
+      indicator: items.map(i=>({name:i.name.toUpperCase(), max:1})),
+      axisName:{color:'#fff'},
+      splitArea:{areaStyle:{color:['rgba(255,255,255,.03)','rgba(255,255,255,.07)']}},
+      splitLine:{lineStyle:{color:'rgba(255,255,255,.25)'}},
+      axisLine:{lineStyle:{color:'rgba(255,255,255,.25)'}}
+    },
+    series:[{
+      type:'radar',
+      areaStyle:{color:'rgba(0,234,255,.35)'},
+      lineStyle:{color:COL.RADAR, width:2},
+      itemStyle:{color:COL.RADAR},
+      data:[{ value: items.map(i=>i.value), name: TEAM }]
+    }],
+    textStyle:{color:'#fff'}
+  }, true);
+}
+
+// Comparatif équipe vs moyenne (bleu vif / gris)
+function renderLeagueCompareMetric(metricKey, season){
+  CH_METRIC ||= echarts.init(document.getElementById('lfc-chart-metric'));
+  const statsSeason = STATS.filter(s => s.season === season);
+  const me = statsSeason.find(s => s.team === TEAM) || {};
+  const leagueAvg = statsSeason.reduce((a,s)=>a+(+s[metricKey]||0),0)/(statsSeason.length||1);
+
+  CH_METRIC.setOption({
+    color:[COL.TEAM, COL.AVG],
+    tooltip:{ trigger:'axis', axisPointer:{type:'shadow'}, confine:true, appendToBody:true },
+    grid:{left:50,right:20,top:40,bottom:40},
+    legend:{top:6,textStyle:{color:'#fff'},itemWidth:16,itemHeight:10},
+    xAxis:{type:'category',data:[TEAM,'Moyenne PL'],axisLabel:{show:false}},
+    yAxis:{type:'value',axisLabel:{color:'#fff',formatter:v=> v>=1000 ? (v/1000).toLocaleString('fr-FR',{maximumFractionDigits:1})+'k' : v},
+           splitLine:{show:true,lineStyle:{opacity:.15}}},
+    series:[
+      {name:'Huddersfield Town', type:'bar', data:[+me[metricKey]||0],     barWidth:'32%', itemStyle:{borderRadius:[6,6,0,0]}},
+      {name:'Moyenne PL',     type:'bar', data:[Math.round(leagueAvg)], barWidth:'32%', itemStyle:{borderRadius:[6,6,0,0]}}
+    ],
+    textStyle:{color:'#fff'}
+  }, true);
+
+  const titleEl = document.querySelector('.lfc-card h2, .lfc-card-title');
+  if (titleEl && titleEl.closest('.lfc-card')?.contains(document.getElementById('lfc-chart-metric'))) {
+    if (!h2.parentNode) { h2.textContent= TEAM + ' vs moyenne ligue'; header.appendChild(h2); }
+  }
+}
+
+/* ===== RENDU SAISON ===== */
+async function renderSeason(season){
+  document.getElementById('lfc-badge').textContent = 'Saison ' + season;
+  try{
+    const [matches,stats] = await loadAll();
+    const teamMatches = matches.filter(m => m.season===season && (m.home_team===TEAM || m.away_team===TEAM));
+    const teamStats   = stats.find(s => s.season===season && s.team===TEAM) || {};
+    fillKPIs(teamStats);
+
+    const br = resultBreakdown(teamMatches);
+    renderResults(br);
+    renderGoals(br);
+    renderRadar(normStats(teamStats));
+
+    const metricSel = document.getElementById('lfc-metric');
+    const metricKey = metricSel ? metricSel.value : 'goals';
+    renderLeagueCompareMetric(metricKey, season);
+
+    if(!RESIZE_BOUND){
+      RESIZE_BOUND = true;
+      window.addEventListener('resize', ()=>{ CH_RES?.resize(); CH_GOALS?.resize(); CH_RADAR?.resize(); CH_METRIC?.resize(); });
+    }
+  }catch(e){ console.error(e); showError(e.message); }
+}
+
+/* ===== INIT ===== */
+(async function init(){
+  const selSeason = document.getElementById('lfc-season-select');
+  SEASONS.forEach(s=>{ const o=document.createElement('option'); o.value=s; o.textContent=s; selSeason.appendChild(o); });
+  selSeason.value='2006-2007';
+
+  let selMetric = document.getElementById('lfc-metric');
+  if(!selMetric){
+    const card  = document.querySelector('#lfc-chart-metric')?.closest('.lfc-card');
+    const chart = document.getElementById('lfc-chart-metric');
+    const header = document.createElement('div');
+    header.className='lfc-card-header';
+    header.style.cssText='display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:8px;';
+    const h2 = card.querySelector('h2') || document.createElement('h2');
+    if(!h2.parentNode){ h2.textContent= TEAM + ' vs moyenne ligue'; header.appendChild(h2); }
+    else header.appendChild(h2);
+    const label = document.createElement('label'); label.className='table-season'; label.innerHTML='<span>Statistique</span>';
+    selMetric = document.createElement('select'); selMetric.id='lfc-metric';
+    label.appendChild(selMetric); header.appendChild(label); card.insertBefore(header, chart);
+  }
+
+  Object.entries(METRICS).forEach(([k,l])=>{ const o=document.createElement('option'); o.value=k; o.textContent=l; selMetric.appendChild(o); });
+  selMetric.value='goals';
+  selMetric.addEventListener('change', ()=>renderLeagueCompareMetric(selMetric.value, selSeason.value));
+
+  await renderSeason(selSeason.value);
+  selSeason.addEventListener('change', e=>renderSeason(e.target.value));
+})();
+
+  </script>
+  
+</body>
+</html>

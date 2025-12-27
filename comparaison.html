@@ -1,0 +1,293 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Premier League — Comparaison d’équipes</title>
+  <link rel="stylesheet" href="style.css">
+
+  <style>
+    /* ===== LAYOUT GLOBAL ===== */
+    .compare-layout {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr)); /* 50% / 50% */
+      gap: 40px;
+      max-width: 1800px;
+      margin: 150px auto;
+      padding: 0 40px;
+      align-items: stretch; /* même hauteur pour les 2 colonnes */
+    }
+  
+    /* ===== CARTES GAUCHE & DROITE (même base visuelle) ===== */
+    .compare-card,
+    .compare-video {
+      background: var(--card);
+      border-radius: var(--radius);
+      outline: 1px solid #d971ff;
+      box-shadow:
+        0 0 10px #d971ff,
+        0 0 18px rgba(217,113,255,.6),
+        0 0 30px rgba(217,113,255,.4);
+      min-height: 650px;           /* même hauteur de base */
+    }
+  
+    /* La carte de gauche a du padding interne, la vidéo NON */
+    .compare-card {
+      padding: 32px 32px 34px;
+      display: flex;
+      flex-direction: column;
+    }
+  
+    /* ===== CONTENU CARTE COMPARAISON (GAUCHE) ===== */
+    .compare-header {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 24px;
+      margin-bottom: 16px;
+      text-align: center;
+    }
+  
+    .compare-text {
+      max-width: 620px;
+    }
+  
+    .compare-text h1 {
+      font-size: 28px;
+      margin-bottom: 8px;
+    }
+  
+    .compare-text p {
+      opacity: .9;
+      font-size: 14px;
+      line-height: 1.5;
+    }
+  
+    .compare-controls {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      align-items: center;
+      justify-content: center;
+    }
+  
+    .compare-controls > div {
+      min-width: 200px;
+      text-align: left;
+    }
+  
+    .compare-controls label {
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      opacity: .75;
+      display: block;
+      margin-bottom: 4px;
+    }
+  
+    .compare-select {
+      appearance: none;
+      background: #32083a;
+      color: #fff;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,.15);
+      padding: 8px 18px;
+      font-weight: 700;
+      font-size: 14px;
+      outline: none;
+      width: 100%;
+      transition: all .25s ease;
+      cursor: pointer;
+    }
+  
+    .compare-select:hover {
+      background: #fff;
+      color: #32083a;
+      border-color: #32083a;
+    }
+  
+    .compare-select:focus-visible {
+      background: #fff;
+      color: #32083a;
+      border-color: #d971ff;
+      box-shadow: 0 0 0 3px rgba(217,113,255,.35);
+    }
+  
+    #comparisonChart {
+      width: 100%;
+      height: 460px;
+      margin-top: 16px;
+    }
+  
+    .compare-warning {
+      font-size: 13px;
+      margin-top: 6px;
+      color: #ffd3e0;
+      text-align: center;
+      display: none;
+    }
+  
+    /* ===== VIDEO (DROITE) ===== */
+    .compare-video {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 0;           /* 🔥 important : pas de padding interne */
+      overflow: hidden;     /* évite que la vidéo dépasse avec object-fit */
+    }
+  
+    .compare-video video {
+      width: 100%;
+      height: 100%;
+      display: block;
+      border-radius: calc(var(--radius) - 8px);
+      object-fit: cover;    /* la vidéo remplit tout le carré */
+    }
+  
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 1000px) {
+      .compare-layout {
+        grid-template-columns: 1fr;
+        margin: 120px auto 110px;
+        padding: 0 16px;
+      }
+  
+      .compare-card,
+      .compare-video {
+        min-height: 420px;
+      }
+  
+      #comparisonChart {
+        height: 340px;
+      }
+    }
+  </style>
+  
+</head>
+
+<body>
+  <!-- HEADER -->
+  <header class="pl-header">
+    <div class="pl-wrap">
+      <img class="pl-logo"
+           src="https://upload.wikimedia.org/wikipedia/en/f/f2/Premier_League_Logo.svg"
+           alt="Premier League">
+      <nav class="pl-nav">
+        <a href="index.html" class="nav-link">Accueil</a>
+        <a href="classement.html" class="nav-link">Classement</a>
+        <a href="equipes.html" class="nav-link">Équipes</a>
+        <a href="comparaison.html" class="nav-link">Comparaison</a>
+        <a href="probabilites.html" class="nav-link">Chances de gagner</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- LAYOUT 2 COLONNES -->
+  <main class="compare-layout">
+
+    <!-- COLONNE GAUCHE : CARTE COMPARAISON -->
+    <section class="compare-card">
+      <div class="compare-header">
+        <div class="compare-text">
+          <h1>Comparer deux équipes</h1>
+          <p>
+            Choisis deux clubs de Premier League pour visualiser l’évolution de leurs 
+            <strong>statistiques par saison</strong>.   
+          </p>
+        </div>
+
+        <div class="compare-controls">
+          <div>
+            <label for="teamA">ÉQUIPE A</label>
+            <select id="teamA" class="compare-select"></select>
+          </div>
+          <div>
+            <label for="teamB">ÉQUIPE B</label>
+            <select id="teamB" class="compare-select"></select>
+          </div>
+          <div>
+            <label for="metric">MÉTRIQUE</label>
+            <select id="metric" class="compare-select">
+              <option value="goals">Buts</option>
+              <option value="wins">Victoires</option>
+              <option value="total_pass">Passes</option>
+              <option value="clean_sheet">Clean Sheets</option>
+              <option value="total_scoring_att">Tirs</option>
+              <option value="ontarget_scoring_att">Tirs cadrés</option>
+              <option value="total_tackle">Tacles</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <div id="comparisonChart" aria-label="Graphique comparant l’évolution des stats par saison"></div>
+      <div id="same-team-warning" class="compare-warning">
+        ⚠ Tu as sélectionné deux fois la même équipe : la comparaison est moins parlante.
+      </div>
+    </section>
+
+    <!-- COLONNE DROITE : VIDEO -->
+    <aside class="compare-video">
+      <!-- Mets ton fichier vidéo à la racine du projet avec ce nom -->
+      <video src="plvideo.mp4" autoplay muted loop></video>
+    </aside>
+
+  </main>
+
+  <!-- FOOTER LOGOS (inchangé) -->
+  <footer class="footer">
+    <div class="logos-track">
+      <div class="logos-slide">
+        <img src="https://upload.wikimedia.org/wikipedia/en/0/0c/Liverpool_FC.svg" alt="Liverpool">
+        <img src="https://upload.wikimedia.org/wikipedia/en/5/53/Arsenal_FC.svg" alt="Arsenal">
+        <img src="https://upload.wikimedia.org/wikipedia/en/b/b4/Tottenham_Hotspur.svg" alt="Tottenham">
+        <img src="https://upload.wikimedia.org/wikipedia/en/e/eb/Manchester_City_FC_badge.svg" alt="Man City">
+        <img src="https://upload.wikimedia.org/wikipedia/en/7/7a/Manchester_United_FC_crest.svg" alt="Man Utd">
+        <img src="https://upload.wikimedia.org/wikipedia/en/c/cc/Chelsea_FC.svg" alt="Chelsea">
+        <img src="https://upload.wikimedia.org/wikipedia/en/5/56/Newcastle_United_Logo.svg" alt="Newcastle">
+
+        <img src="logo/everton.png" alt="Everton">
+        <img src="logo/crystal-palace.png" alt="Crystal Palace">
+        <img src="logo/west-ham.png" alt="West Ham">
+        <img src="logo/fulham.png" alt="Fulham">
+        <img src="logo/wolves.png" alt="Wolves">
+        <img src="logo/brighton.png" alt="Brighton">
+        <img src="logo/burnley.png" alt="Burnley">
+        <img src="logo/sheffield.png" alt="Sheffield">
+        <img src="logo/forest.png" alt="Forest">
+        <img src="logo/southampton.png" alt="Southampton">
+        <img src="logo/portsmouth.png" alt="Portsmouth">
+        <img src="logo/sunderland.png" alt="Sunderland">
+        <img src="logo/stoke-city.png" alt="Stoke City">
+        <img src="logo/swansea.png" alt="Swansea">
+        <img src="logo/wigan.png" alt="Wigan">
+        <img src="logo/blackpool.png" alt="Blackpool">
+        <img src="logo/hull-city.png" alt="Hull City">
+        <img src="logo/reading.png" alt="Reading">
+        <img src="logo/bolton.png" alt="Bolton">
+        <img src="logo/birmingham.png" alt="Birmingham City">
+        <img src="logo/cardiff.png" alt="Cardiff">
+        <img src="logo/qpr.png" alt="QPR">
+        <img src="logo/west-brom.png" alt="West Brom">
+        <img src="logo/ipswich.png" alt="Ipswich">
+        <img src="logo/leicester.png" alt="Leicester">
+        <img src="logo/aston-villa.png" alt="Aston Villa">
+        <img src="logo/blackburn.png" alt="Blackburn Rovers">
+        <img src="logo/huddersfield.png" alt="Huddersfield Town">
+        <img src="logo/derby.png" alt="Derby County">
+        <img src="logo/charlton.png" alt="Charlton Athletic">
+        <img src="logo/norwich.png" alt="Norwich City">
+        <img src="logo/watford.png" alt="Watford">
+        <img src="logo/middlesbrough.png" alt="Middlesbrough">
+        <img src="logo/bournemouth.png" alt="Bournemouth">
+      </div>
+      <div class="logos-slide" aria-hidden="true">
+        <!-- tu peux dupliquer le même contenu ici si besoin -->
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/echarts@5/dist/echarts.min.js"></script>
+  <script src="compare.js" defer></script>
+</body>
+</html>
